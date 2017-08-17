@@ -50,14 +50,14 @@ public class StepUtil {
      * 返回null,表示用户没有该传感器,返回_go_step,可以开始进行计步
      * 增加广播(名称:_step_manager)进行监听返回字段_step的值
      */
-    public String _get_google_step(){
+    public boolean _get_google_step(){
 
         SensorManager _manager = (SensorManager) _context.getSystemService(_context.SENSOR_SERVICE);
 
         Sensor _senor = _manager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
 
         if(null==_senor){
-            return "_step_fail";
+            return false;
         }
 
         SensorEventListener _sensorListener = new SensorEventListener() {
@@ -78,6 +78,6 @@ public class StepUtil {
 
         _manager.registerListener(_sensorListener,_senor,Sensor.TYPE_STEP_COUNTER,SensorManager.SENSOR_DELAY_UI);
 
-        return "_step_success";
+        return true;
     }
 }
