@@ -50,13 +50,15 @@ public class StepUtil {
      * 返回null,表示用户没有该传感器,返回_go_step,可以开始进行计步
      * 增加广播(名称:_step_manager)进行监听返回字段_step的值
      */
-    public boolean _get_google_step(){
+    public boolean _get_step(){
 
         SensorManager _manager = (SensorManager) _context.getSystemService(_context.SENSOR_SERVICE);
 
         Sensor _senor = _manager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
 
         if(null==_senor){
+
+            //该设备无运动传感器
             return false;
         }
 
