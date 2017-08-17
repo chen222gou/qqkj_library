@@ -1,4 +1,4 @@
-package qqkj.qqkj_library.step;
+package qqkj.qqkj_library.sensor.step;
 
 import android.content.Context;
 import android.content.Intent;

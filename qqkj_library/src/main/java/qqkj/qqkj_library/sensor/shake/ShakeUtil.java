@@ -1,4 +1,4 @@
-package qqkj.qqkj_library.shake;
+package qqkj.qqkj_library.sensor.shake;
 
 import android.content.Context;
 import android.content.Intent;
