@@ -33,15 +33,15 @@ public class StepUtil {
      * 单例
      * @param _context
      */
-    public static StepUtil getIns(Context _context ){
+        public static StepUtil getIns(Context _context ){
 
-        if( _step_util==null ){
+            if( _step_util==null ){
 
-            _step_util = new StepUtil(_context);
+                _step_util = new StepUtil(_context);
+            }
+
+            return _step_util;
         }
-
-        return _step_util;
-    }
 
 
     /**
