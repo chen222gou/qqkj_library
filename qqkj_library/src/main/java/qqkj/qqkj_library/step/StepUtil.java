@@ -13,9 +13,13 @@ import android.hardware.SensorManager;
 
 public class StepUtil {
 
-    private Context _context;
+    private Context _context = null;
 
-    private static StepUtil _step_util;
+    private static StepUtil _step_util = null;
+
+    private SensorManager _manager = null;
+
+    private SensorEventListener _sensor_listener = null;
 
     private Intent _intent = new Intent("_step_manager");
 
@@ -33,7 +37,7 @@ public class StepUtil {
      * 单例
      * @param _context
      */
-        public static StepUtil getIns(Context _context ){
+        public static StepUtil getIns(Context _context){
 
             if( _step_util==null ){
 
@@ -45,14 +49,14 @@ public class StepUtil {
 
 
     /**
-     * 计步器方法
+     * 启动计步器
      *
      * 返回null,表示用户没有该传感器,返回_go_step,可以开始进行计步
      * 增加广播(名称:_step_manager)进行监听返回字段_step的值
      */
     public boolean _get_step(){
 
-        SensorManager _manager = (SensorManager) _context.getSystemService(_context.SENSOR_SERVICE);
+        _manager = (SensorManager) _context.getSystemService(_context.SENSOR_SERVICE);
 
         Sensor _senor = _manager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
 
@@ -62,7 +66,7 @@ public class StepUtil {
             return false;
         }
 
-        SensorEventListener _sensorListener = new SensorEventListener() {
+        _sensor_listener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
 
@@ -78,8 +82,20 @@ public class StepUtil {
             }
         };
 
-        _manager.registerListener(_sensorListener,_senor,Sensor.TYPE_STEP_COUNTER,SensorManager.SENSOR_DELAY_UI);
+        _manager.registerListener(_sensor_listener,_senor,Sensor.TYPE_STEP_COUNTER,SensorManager.SENSOR_DELAY_UI);
 
         return true;
+    }
+
+    /**
+     *
+     * 回收计步器
+     */
+    public void _destroy_step(){
+
+        if( null!=_manager && null!=_sensor_listener ){
+
+            _manager.unregisterListener(_sensor_listener);
+        }
     }
 }
