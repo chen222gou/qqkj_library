@@ -43,16 +43,6 @@ public class ShakeUtil {
         return _shake;
     }
 
-    public static ShakeUtil getIns( Context _context ,int _sensor_value){
-
-        if( _shake==null ){
-
-            _shake = new ShakeUtil( _context );
-        }
-
-        return _shake;
-    }
-
     /**
      * 设置摇一摇基数 默认16
      * @param _sensor_value
@@ -141,6 +131,8 @@ public class ShakeUtil {
         if( null!=_manager && null!=_sensor_listener ){
 
             _manager.unregisterListener(_sensor_listener);
+
+            _manager = null;
         }
     }
 }
