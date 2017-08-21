@@ -27,6 +27,8 @@ public class ShakeUtil {
 
     private int _sensor_value = 16;
 
+    private Sensor _accelerometer = null;
+
     public ShakeUtil( Context _context ){
 
         this._context = _context;
@@ -58,12 +60,19 @@ public class ShakeUtil {
      */
     public boolean _get_shake(){
 
-        _manager = ((SensorManager) _context.getSystemService(_context.SENSOR_SERVICE));
+        if( null == _manager ){
+
+            _manager = ((SensorManager) _context.getSystemService(_context.SENSOR_SERVICE));
+        }
 
         if (_manager != null) {
 
             //获取加速度传感器
-            Sensor _accelerometer = _manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+            if( null == _accelerometer ){
+
+                _accelerometer = _manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            }
 
             if (_accelerometer != null) {
 
