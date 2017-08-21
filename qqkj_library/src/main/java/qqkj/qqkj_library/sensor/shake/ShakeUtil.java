@@ -25,6 +25,8 @@ public class ShakeUtil {
 
     private boolean _shake_state = false;
 
+    private int _sensor_value = 16;
+
     public ShakeUtil( Context _context ){
 
         this._context = _context;
@@ -39,6 +41,25 @@ public class ShakeUtil {
         }
 
         return _shake;
+    }
+
+    public static ShakeUtil getIns( Context _context ,int _sensor_value){
+
+        if( _shake==null ){
+
+            _shake = new ShakeUtil( _context );
+        }
+
+        return _shake;
+    }
+
+    /**
+     * 设置摇一摇基数 默认16
+     * @param _sensor_value
+     */
+    public void _setSensorValue( int _sensor_value ){
+
+        this._sensor_value = _sensor_value;
     }
 
     /**
@@ -69,8 +90,8 @@ public class ShakeUtil {
                             float y = values[1];
                             float z = values[2];
 
-                            if ((Math.abs(x) > 16 || Math.abs(y) > 16 || Math
-                                    .abs(z) > 16) && !_shake_state) {
+                            if ((Math.abs(x) > _sensor_value || Math.abs(y) > _sensor_value || Math
+                                    .abs(z) > _sensor_value) && !_shake_state) {
 
                                 _shake_state = true;
 
