@@ -60,6 +60,8 @@ public class ShakeUtil {
      */
     public boolean _get_shake(){
 
+        _reset_shake();
+
         if( null == _manager ){
 
             _manager = ((SensorManager) _context.getSystemService(_context.SENSOR_SERVICE));
