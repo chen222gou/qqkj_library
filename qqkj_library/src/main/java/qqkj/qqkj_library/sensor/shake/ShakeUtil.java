@@ -49,7 +49,7 @@ public class ShakeUtil {
      * 设置摇一摇基数 默认16
      * @param _sensor_value
      */
-    public void _setSensorValue( int _sensor_value ){
+    public void _set_sensor_value( int _sensor_value ){
 
         this._sensor_value = _sensor_value;
     }
