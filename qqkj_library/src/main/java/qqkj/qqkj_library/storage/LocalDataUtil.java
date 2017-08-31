@@ -16,26 +16,26 @@ import java.io.Serializable;
  * Created by 陈二狗 on 2017/8/30.
  */
 
-public class _LocalDataUtil {
+public class LocalDataUtil {
 
-    private static _LocalDataUtil _local_data_util = null;
+    private static LocalDataUtil _local_data_util = null;
 
     private Context _context = null;
 
     private SharedPreferences _sharepreferences = null;
 
 
-    public _LocalDataUtil(Context _context) {
+    public LocalDataUtil(Context _context) {
 
         this._context = _context;
     }
 
 
-    public static _LocalDataUtil getIns(Context _context) {
+    public static LocalDataUtil getIns(Context _context) {
 
         if (null == _local_data_util) {
 
-            _local_data_util = new _LocalDataUtil(_context);
+            _local_data_util = new LocalDataUtil(_context);
         }
 
         return _local_data_util;

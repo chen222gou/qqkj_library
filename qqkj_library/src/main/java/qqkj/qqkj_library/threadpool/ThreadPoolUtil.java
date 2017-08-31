@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created by chen2gou on 2017/8/17.
  */
 
-public class _ThreadPoolUtil {
+public class ThreadPoolUtil {
 
     // 线程池核心线程数
     private static int CORE_POOL_SIZE = 8;

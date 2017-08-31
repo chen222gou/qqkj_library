@@ -11,13 +11,13 @@ import android.hardware.SensorManager;
  * Created by chen2gou on 2017/8/17.
  */
 
-public class _ShakeUtil {
+public class ShakeUtil {
 
     private Context _context = null;
 
     private Intent _intent = new Intent("_shake_manager");
 
-    private static _ShakeUtil _shake = null;
+    private static ShakeUtil _shake = null;
 
     private SensorManager _manager = null;
 
@@ -29,17 +29,17 @@ public class _ShakeUtil {
 
     private Sensor _accelerometer = null;
 
-    public _ShakeUtil(Context _context ){
+    public ShakeUtil(Context _context ){
 
         this._context = _context;
     }
 
 
-    public static _ShakeUtil getIns(Context _context ){
+    public static ShakeUtil getIns(Context _context ){
 
         if( _shake==null ){
 
-            _shake = new _ShakeUtil( _context );
+            _shake = new ShakeUtil( _context );
         }
 
         return _shake;
