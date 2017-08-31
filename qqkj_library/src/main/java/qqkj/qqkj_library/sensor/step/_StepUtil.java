@@ -11,11 +11,11 @@ import android.hardware.SensorManager;
  * Created by apple on 2017/8/17.
  */
 
-public class StepUtil {
+public class _StepUtil {
 
     private Context _context = null;
 
-    private static StepUtil _step_util = null;
+    private static _StepUtil _step_util = null;
 
     private SensorManager _manager = null;
 
@@ -27,7 +27,7 @@ public class StepUtil {
      * 构造函数,传入上下文对象
      * @param _context
      */
-    private StepUtil(Context _context ){
+    private _StepUtil(Context _context ){
 
         this._context = _context;
 
@@ -37,11 +37,11 @@ public class StepUtil {
      * 单例
      * @param _context
      */
-        public static StepUtil getIns(Context _context){
+        public static _StepUtil getIns(Context _context){
 
             if( _step_util==null ){
 
-                _step_util = new StepUtil(_context);
+                _step_util = new _StepUtil(_context);
             }
 
             return _step_util;
