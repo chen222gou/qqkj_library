@@ -24,7 +24,7 @@ public class PremissionUtil {
 
     private boolean _premission_result = true;
 
-    public int _go_setting_act = 99;
+    public int _go_setting_act = 99;    //回调code
 
     private String _intent_uri = Settings.ACTION_SETTINGS;
 
