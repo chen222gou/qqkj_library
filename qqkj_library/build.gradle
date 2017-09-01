@@ -22,11 +22,24 @@ android {
     }
 }
 
+allprojects {
+    repositories {
+        jcenter()
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
+        }
+    }
+}
+
 dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
+    //自动布局
     compile 'com.zhy:autolayout:1.4.5'
+    //阿里云推送
+    compile 'com.aliyun.ams:alicloud-android-push:2.3.7'
+    compile 'com.aliyun.ams:alicloud-android-third-push:3.0.3@aar'
 //    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 //    compile 'com.android.support:design:25.3.1'
 //    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
