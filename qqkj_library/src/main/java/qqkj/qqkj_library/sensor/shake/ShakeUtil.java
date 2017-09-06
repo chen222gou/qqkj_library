@@ -15,7 +15,11 @@ public class ShakeUtil {
 
     private Context _context = null;
 
-    private Intent _intent = new Intent("_shake_manager");
+    public static final String SHAKE_BR_NAME = "_shake_manager";
+
+    public static final String SHAKE_BR_PARAM = "_shake";
+
+    private Intent _intent = new Intent(SHAKE_BR_NAME);
 
     private static ShakeUtil _shake = null;
 
@@ -28,6 +32,7 @@ public class ShakeUtil {
     private int _sensor_value = 16;
 
     private Sensor _accelerometer = null;
+
 
     public ShakeUtil(Context _context ){
 
@@ -65,61 +70,53 @@ public class ShakeUtil {
         if( null == _manager ){
 
             _manager = ((SensorManager) _context.getSystemService(_context.SENSOR_SERVICE));
-        }
 
-        if (_manager != null) {
-
-            //获取加速度传感器
-
-            if( null == _accelerometer ){
-
-                _accelerometer = _manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-            }
-
-            if (_accelerometer != null) {
-
-                _sensor_listener = new SensorEventListener() {
-                    @Override
-                    public void onSensorChanged(SensorEvent _event) {
-
-                        int _type = _event.sensor.getType();
-
-                        if (_type == Sensor.TYPE_ACCELEROMETER) {
-                            //获取三个方向值
-                            float[] values = _event.values;
-                            float x = values[0];
-                            float y = values[1];
-                            float z = values[2];
-
-                            if ((Math.abs(x) > _sensor_value || Math.abs(y) > _sensor_value || Math
-                                    .abs(z) > _sensor_value) && !_shake_state) {
-
-                                _shake_state = true;
-
-                                _intent.putExtra("_shake",1);
-                                _context.sendBroadcast(_intent);
-
-                            }
-                        }
-
-                    }
-
-                    @Override
-                    public void onAccuracyChanged(Sensor sensor, int i) {
-
-                        System.out.println("sensor = [" + sensor + "], i = [" + i + "]");
-                    }
-                };
-
-                _manager.registerListener(_sensor_listener, _accelerometer, SensorManager.SENSOR_DELAY_UI);
-            }else{
+            if( null == _manager){
 
                 return false;
             }
-        }else{
-
-            return false;
         }
+
+        if(null == _accelerometer){
+
+            _accelerometer = _manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+            if(null == _accelerometer){
+
+                return false;
+            }
+        }
+
+        _sensor_listener = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent _event) {
+
+                int _type = _event.sensor.getType();
+
+                if (_type == Sensor.TYPE_ACCELEROMETER) {
+
+                    //获取三个方向值
+                    float[] values = _event.values;
+
+                    float x = values[0];
+                    float y = values[1];
+                    float z = values[2];
+
+                    if ((Math.abs(x) > _sensor_value || Math.abs(y) > _sensor_value || Math
+                            .abs(z) > _sensor_value) && !_shake_state) {
+
+                        _shake_state = true;
+                        _intent.putExtra(SHAKE_BR_PARAM,1);
+                        _context.sendBroadcast(_intent);
+                    }
+                }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int i) {}
+        };
+
+        _manager.registerListener(_sensor_listener, _accelerometer, SensorManager.SENSOR_DELAY_UI);
 
         return true;
     }
@@ -142,6 +139,8 @@ public class ShakeUtil {
         if( null!=_manager && null!=_sensor_listener ){
 
             _manager.unregisterListener(_sensor_listener);
+
+            _accelerometer = null;
 
             _manager = null;
         }

@@ -20,11 +20,11 @@ public class PremissionUtil {
 
     private static PremissionUtil _premission = null;
 
+    public static final int GO_SETTING_ACT = 999;    //回调code
+
     private Activity _context = null;
 
     private boolean _premission_result = true;
-
-    public int _go_setting_act = 99;    //回调code
 
     private String _intent_uri = Settings.ACTION_SETTINGS;
 
@@ -115,7 +115,7 @@ public class PremissionUtil {
 
                         _intent.setData(_uri);
 
-                        _context.startActivityForResult(_intent, _go_setting_act);
+                        _context.startActivityForResult(_intent, GO_SETTING_ACT);
                     }
 
                     _premission_result = false;
