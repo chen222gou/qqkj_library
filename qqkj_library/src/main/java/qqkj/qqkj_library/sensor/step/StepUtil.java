@@ -6,6 +6,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Handler;
 
 /**
  * 获取当前设备的计步器步数
@@ -30,18 +31,39 @@ public class StepUtil {
 
     private Sensor _sensor_step = null;
 
+    private boolean _sensor_intent_more = false;    //是否开启 达到一定步数再发送广播,默认不开启,每一步都发送广播
+
+    private int _step_sum = 0;  //间隔模式总步数
+
+    private Handler _handler = new Handler();   //间隔模式消息机制
+
+    private int _handler_time = 5000;
+
     /**
-     * 构造函数,传入上下文对象
+     * 默认模式构造函数
      *
      * @param _context
      */
     private StepUtil(Context _context) {
 
         this._context = _context;
+        this._sensor_intent_more = false;
     }
 
     /**
-     * 单例
+     * 间隔模式构造函数
+     *
+     * @param _context
+     */
+    private StepUtil(Context _context, boolean _sensor_intent_more, int _handler_time) {
+
+        this._context = _context;
+        this._sensor_intent_more = _sensor_intent_more;
+        this._handler_time = _handler_time;
+    }
+
+    /**
+     * 默认模式单例
      *
      * @param _context
      */
@@ -55,6 +77,21 @@ public class StepUtil {
         return _step_util;
     }
 
+
+    /**
+     * 间隔模式单利
+     *
+     * @param _context
+     */
+    public static StepUtil getIns(Context _context, int _handler_time) {
+
+        if (_step_util == null) {
+
+            _step_util = new StepUtil(_context, true, _handler_time);
+        }
+
+        return _step_util;
+    }
 
     /**
      * 启动计步器
@@ -86,13 +123,36 @@ public class StepUtil {
             }
         }
 
+        //开始间隔模式
+        if (_sensor_intent_more) {
+
+            _handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    _send_data();
+                }
+            }, _handler_time);
+        }
+
         _sensor_listener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
 
-                int _step = (int)sensorEvent.values[0];
-                _intent.putExtra(STEP_BR_PARAM, String.valueOf(_step));
-                _context.sendBroadcast(_intent);
+                int _step = (int) sensorEvent.values[0];
+
+                if (_sensor_intent_more) {
+
+                    //间隔模式
+                    _step_sum = _step_sum + _step;
+                } else {
+
+                    //默认模式
+                    _intent.putExtra(STEP_BR_PARAM, String.valueOf(_step));
+                    _context.sendBroadcast(_intent);
+                }
+
+
             }
 
             @Override
@@ -103,6 +163,32 @@ public class StepUtil {
         _manager.registerListener(_sensor_listener, _sensor_step, Sensor.TYPE_STEP_DETECTOR, SensorManager.SENSOR_DELAY_UI);
 
         return true;
+    }
+
+
+    /**
+     * 间隔模式
+     */
+    private void _send_data() {
+
+        if (_sensor_intent_more) {
+
+            //发送计步数据
+            _intent.putExtra(STEP_BR_PARAM, String.valueOf(_step_sum));
+            _context.sendBroadcast(_intent);
+
+            //清空之前积累步数
+            _step_sum = 0;
+
+            //
+            _handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    _send_data();
+                }
+            }, _handler_time);
+        }
     }
 
 
