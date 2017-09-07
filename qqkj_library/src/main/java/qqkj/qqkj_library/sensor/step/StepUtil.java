@@ -62,11 +62,12 @@ public class StepUtil {
      * 返回null,表示用户没有该传感器,返回_go_step,可以开始进行计步
      * 增加广播(名称:_step_manager)进行监听返回字段_step的值
      */
+
     public boolean _get_step() {
 
         if (null == _manager) {
 
-            _manager = (SensorManager) _context.getSystemService(_context.SENSOR_SERVICE);
+            _manager = (SensorManager) _context.getSystemService(Context.SENSOR_SERVICE);
 
             if (null == _manager) {
 
@@ -76,7 +77,7 @@ public class StepUtil {
 
         if (null == _sensor_step) {
 
-            _sensor_step = _manager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+            _sensor_step = _manager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
 
             if (null == _sensor_step) {
 
@@ -99,7 +100,7 @@ public class StepUtil {
             }
         };
 
-        _manager.registerListener(_sensor_listener, _sensor_step, Sensor.TYPE_STEP_COUNTER, SensorManager.SENSOR_DELAY_UI);
+        _manager.registerListener(_sensor_listener, _sensor_step, Sensor.TYPE_STEP_DETECTOR, SensorManager.SENSOR_DELAY_UI);
 
         return true;
     }
