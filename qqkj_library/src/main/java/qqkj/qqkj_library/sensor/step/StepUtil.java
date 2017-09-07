@@ -35,9 +35,9 @@ public class StepUtil {
 
     private int _step_sum = 0;  //间隔模式总步数
 
-    private Handler _handler = new Handler();   //间隔模式消息机制
+    private static Handler _handler = null;   //间隔模式消息机制
 
-    private int _handler_time = 5000;
+    private int _handler_time = 5000;   //间隔时间
 
     /**
      * 默认模式构造函数
@@ -85,6 +85,9 @@ public class StepUtil {
      */
     public static StepUtil getIns(Context _context, int _handler_time) {
 
+        //实例化间隔消息
+        _handler = new Handler();
+
         if (_step_util == null) {
 
             _step_util = new StepUtil(_context, true, _handler_time);
@@ -124,7 +127,7 @@ public class StepUtil {
         }
 
         //开始间隔模式
-        if (_sensor_intent_more) {
+        if (null != _handler && _sensor_intent_more) {
 
             _handler.postDelayed(new Runnable() {
                 @Override
@@ -171,7 +174,7 @@ public class StepUtil {
      */
     private void _send_data() {
 
-        if (_sensor_intent_more) {
+        if (null != _handler && _sensor_intent_more) {
 
             //发送计步数据
             _intent.putExtra(STEP_BR_PARAM, String.valueOf(_step_sum));
@@ -180,7 +183,6 @@ public class StepUtil {
             //清空之前积累步数
             _step_sum = 0;
 
-            //
             _handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -198,6 +200,10 @@ public class StepUtil {
     public void _destroy_step() {
 
         if (null != _manager && null != _sensor_listener) {
+
+            _sensor_intent_more = false;
+
+            _handler = null;
 
             _manager.unregisterListener(_sensor_listener);
 
