@@ -16,11 +16,13 @@ import android.widget.Toast;
  * Created by 陈二狗 on 2017/8/31.
  */
 
-public class PremissionUtil {
+public class PermissionUtil {
 
-    private static PremissionUtil _premission = null;
+    private static PermissionUtil _premission = null;
 
-    public static final int GO_SETTING_ACT = 999;    //回调code
+    public static final int GO_SETTING_ACT = 99;    //设置回调code
+
+    public static final int REQUEST_CODE = 98;    //权限回调code
 
     private Activity _context = null;
 
@@ -28,16 +30,16 @@ public class PremissionUtil {
 
     private String _intent_uri = Settings.ACTION_SETTINGS;
 
-    private PremissionUtil(Activity _context) {
+    private PermissionUtil(Activity _context) {
 
         this._context = _context;
     }
 
-    public static PremissionUtil getIns(Activity _context) {
+    public static PermissionUtil getIns(Activity _context) {
 
         if (null == _premission) {
 
-            _premission = new PremissionUtil(_context);
+            _premission = new PermissionUtil(_context);
         }
 
         return _premission;
@@ -65,6 +67,7 @@ public class PremissionUtil {
                 break;
             }
         }
+
         if (_is_req) {
 
             ActivityCompat.requestPermissions(_context, _premissions,
@@ -101,13 +104,7 @@ public class PremissionUtil {
 
                         Toast.makeText(_context, "请手动设置您的权限...", Toast.LENGTH_LONG).show();
 
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-                            _intent_uri = Settings.ACTION_MANAGE_OVERLAY_PERMISSION;
-                        } else {
-
-                            _intent_uri = Settings.ACTION_SETTINGS;
-                        }
+                        _intent_uri = Settings.ACTION_APPLICATION_DETAILS_SETTINGS;
 
                         Intent _intent = new Intent(_intent_uri);
 

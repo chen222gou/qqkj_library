@@ -19,9 +19,10 @@ public class DistanceUtil {
 
     /**
      * 构造方法
+     *
      * @param _context
      */
-    private DistanceUtil(Context _context){
+    private DistanceUtil(Context _context) {
 
         this._context = _context;
     }
@@ -29,12 +30,13 @@ public class DistanceUtil {
 
     /**
      * 单例
+     *
      * @param _context
      * @return
      */
-    public static DistanceUtil getIns(Context _context){
+    public static DistanceUtil getIns(Context _context) {
 
-        if(null == _distance_util){
+        if (null == _distance_util) {
 
             _distance_util = new DistanceUtil(_context);
         }
@@ -45,13 +47,14 @@ public class DistanceUtil {
 
     /**
      * 计算2个经纬度之间的距离
+     *
      * @param _lon1
      * @param _lat1
      * @param _lon2
      * @param _lat2
      * @return
      */
-    public int _get_distance(double _lon1, double _lat1, double _lon2, double _lat2){
+    public int _get_distance(double _lon1, double _lat1, double _lon2, double _lat2) {
 
         double _lat_end, _lon_end, _distance, _sina, _sinb;
 
@@ -69,20 +72,21 @@ public class DistanceUtil {
 
         _distance = 2 * EARTH_RADIUS * Math.asin(Math.sqrt(_sina * _sina + Math.cos(_lat1) * Math.cos(_lat2) * _sinb * _sinb));
 
-        return (int)(_distance*1000);
+        return (int) (_distance * 1000);
     }
 
 
     /**
      * 判断是否在这个范围中
+     *
      * @param _range
      * @return
      */
-    public boolean _get_range(double _lon1, double _lat1, double _lon2, double _lat2, int _range){
+    public boolean _get_range(double _lon1, double _lat1, double _lon2, double _lat2, int _range) {
 
         int _distance = _get_distance(_lon1, _lat1, _lon2, _lat2);
 
-        if(_distance <= _range){
+        if (_distance <= _range) {
 
             return true;
         }
@@ -93,10 +97,11 @@ public class DistanceUtil {
 
     /**
      * 计算包含的弧度
+     *
      * @param _d
      * @return
      */
-    private double radius(double _d){
+    private double radius(double _d) {
 
         return _d * Math.PI / 180.0;
     }
