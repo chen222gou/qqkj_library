@@ -77,6 +77,12 @@ public class CompassUtil {
     }
 
 
+    public static CompassUtil getNew(Context _context) {
+
+        return new CompassUtil(_context);
+    }
+
+
     /**
      * 获取当前手机指南针数据
      *
@@ -138,11 +144,11 @@ public class CompassUtil {
                 //弧度转成角度值
                 _values[0] = (float) Math.toDegrees(_values[0]);
 
-                int _result_value = (int)_values[0];
+                int _result_value = (int) _values[0];
 
-                if(_result_value<0){
+                if (_result_value < 0) {
 
-                    _result_value = 360+_result_value;
+                    _result_value = 360 + _result_value;
                 }
 
                 _intent.putExtra(COMPASS_BR_PARAM, String.valueOf(_result_value));
@@ -153,9 +159,9 @@ public class CompassUtil {
             @Override
             public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
-                if(accuracy < SensorManager.SENSOR_STATUS_ACCURACY_MEDIUM){
+                if (accuracy < SensorManager.SENSOR_STATUS_ACCURACY_MEDIUM) {
 
-                    _intent_accuracy.putExtra(COMPASS_ACCURACY_CHANGE_BR_PARAM,true);
+                    _intent_accuracy.putExtra(COMPASS_ACCURACY_CHANGE_BR_PARAM, true);
 
                     _context.sendBroadcast(_intent_accuracy);
                 }
@@ -173,9 +179,9 @@ public class CompassUtil {
     /**
      * 回收指南针传感器
      */
-    public void _destroy_compass(){
+    public void _destroy_compass() {
 
-        if(null != _sensor_manager && null != _accelerometer_sensor && null != _magnetic_sensor){
+        if (null != _sensor_manager && null != _accelerometer_sensor && null != _magnetic_sensor) {
 
             _sensor_manager.unregisterListener(_sensor_listener);
 

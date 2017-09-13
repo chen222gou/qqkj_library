@@ -7,6 +7,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Handler;
+import android.provider.Settings;
 
 /**
  * 获取当前设备的计步器步数
@@ -25,8 +26,6 @@ public class StepUtil {
 
     private SensorManager _manager = null;
 
-    private SensorEventListener _sensor_listener = null;
-
     private Intent _intent = new Intent(STEP_BR_NAME);
 
     private Sensor _sensor_step = null;
@@ -38,6 +37,8 @@ public class StepUtil {
     private static Handler _handler = null;   //间隔模式消息机制
 
     private int _handler_time = 5000;   //间隔时间
+
+    private long _system_time = 0l;
 
     /**
      * 默认模式构造函数
@@ -96,14 +97,30 @@ public class StepUtil {
         return _step_util;
     }
 
+
+    public static StepUtil getNew(Context _context) {
+
+        return new StepUtil(_context);
+    }
+
+
+    public static StepUtil getNew(Context _context, int _handler_time) {
+
+        _handler = new Handler();
+
+        return new StepUtil(_context, true, _handler_time);
+    }
+
+
     /**
      * 启动计步器
      * <p>
-     * 返回null,表示用户没有该传感器,返回_go_step,可以开始进行计步
-     * 增加广播(名称:_step_manager)进行监听返回字段_step的值
+     * 返回false,表示用户没有传感器,返回true,可以开始进行计步
      */
 
     public boolean _get_step() {
+
+        //初始化计步器模块
 
         if (null == _manager) {
 
@@ -121,12 +138,19 @@ public class StepUtil {
 
             if (null == _sensor_step) {
 
-                //该设备无运动传感器
-                return false;
+                //该设备无运动传感器,执行摇一摇计步
+
+                _sensor_step = _manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+                if (null == _sensor_step) {
+
+                    return false;
+                }
             }
         }
 
-        //开始间隔模式
+        //开启间隔模式
+
         if (null != _handler && _sensor_intent_more) {
 
             _handler.postDelayed(new Runnable() {
@@ -138,11 +162,76 @@ public class StepUtil {
             }, _handler_time);
         }
 
-        _sensor_listener = new SensorEventListener() {
-            @Override
-            public void onSensorChanged(SensorEvent sensorEvent) {
+        if (_sensor_step.getType() == Sensor.TYPE_STEP_DETECTOR) {
 
-                int _step = (int) sensorEvent.values[0];
+            _manager.registerListener
+                    (_sensor_listener_hardware, _sensor_step, Sensor.TYPE_STEP_DETECTOR, SensorManager.SENSOR_DELAY_UI);
+
+        } else if (_sensor_step.getType() == Sensor.TYPE_ACCELEROMETER) {
+
+            _manager.registerListener
+                    (_sensor_listener_soft, _sensor_step, Sensor.TYPE_ACCELEROMETER, SensorManager.SENSOR_DELAY_UI);
+        }
+
+
+        return true;
+    }
+
+
+    /**
+     * 硬件计步器
+     */
+    private SensorEventListener _sensor_listener_hardware = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+
+            int _step = (int) sensorEvent.values[0];
+
+            if (_sensor_intent_more) {
+
+                //间隔模式
+                _step_sum = _step_sum + _step;
+            } else {
+
+                //默认模式
+                _intent.putExtra(STEP_BR_PARAM, String.valueOf(_step));
+                _context.sendBroadcast(_intent);
+            }
+
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {
+        }
+    };
+
+
+    /**
+     * 软件计步器
+     */
+    private SensorEventListener _sensor_listener_soft = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+
+
+            if (System.currentTimeMillis() - _system_time < 300) {
+
+                return;
+            }
+
+            _system_time = System.currentTimeMillis();
+
+            //获取三个方向值
+            float[] values = sensorEvent.values;
+
+            float x = values[0];
+            float y = values[1];
+            float z = values[2];
+
+            if ((Math.abs(x) > 15 || Math.abs(y) > 15 || Math
+                    .abs(z) > 15)) {
+
+                int _step = 1;
 
                 if (_sensor_intent_more) {
 
@@ -155,18 +244,14 @@ public class StepUtil {
                     _context.sendBroadcast(_intent);
                 }
 
-
             }
 
-            @Override
-            public void onAccuracyChanged(Sensor sensor, int i) {
-            }
-        };
+        }
 
-        _manager.registerListener(_sensor_listener, _sensor_step, Sensor.TYPE_STEP_DETECTOR, SensorManager.SENSOR_DELAY_UI);
-
-        return true;
-    }
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {
+        }
+    };
 
 
     /**
@@ -199,17 +284,22 @@ public class StepUtil {
      */
     public void _destroy_step() {
 
-        if (null != _manager && null != _sensor_listener) {
+        if (null != _manager && null != _sensor_listener_hardware) {
 
-            _sensor_intent_more = false;
-
-            _handler = null;
-
-            _manager.unregisterListener(_sensor_listener);
-
-            _sensor_step = null;
-
-            _manager = null;
+            _manager.unregisterListener(_sensor_listener_hardware);
         }
+
+        if (null != _manager && null != _sensor_listener_soft) {
+
+            _manager.unregisterListener(_sensor_listener_soft);
+        }
+
+        _sensor_intent_more = false;
+
+        _handler = null;
+
+        _sensor_step = null;
+
+        _manager = null;
     }
 }

@@ -2,12 +2,12 @@ apply plugin: 'com.android.library'
 //apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
 
@@ -25,16 +25,16 @@ android {
 allprojects {
     repositories {
         jcenter()
-        maven {
-            url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
-        }
+//        maven {
+//            url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
+//        }
     }
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support:design:26.+'
+    compile 'com.android.support:support-v4:26.+'
     //自动布局
     compile 'com.zhy:autolayout:1.4.5'
     //阿里云推送

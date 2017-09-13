@@ -34,54 +34,62 @@ public class ShakeUtil {
     private Sensor _accelerometer = null;
 
 
-    public ShakeUtil(Context _context ){
+    public ShakeUtil(Context _context) {
 
         this._context = _context;
     }
 
 
-    public static ShakeUtil getIns(Context _context ){
+    public static ShakeUtil getIns(Context _context) {
 
-        if( _shake==null ){
+        if (_shake == null) {
 
-            _shake = new ShakeUtil( _context );
+            _shake = new ShakeUtil(_context);
         }
 
         return _shake;
     }
 
+
+    public static ShakeUtil getNew(Context _context) {
+
+        return new ShakeUtil(_context);
+    }
+
     /**
      * 设置摇一摇基数 默认16
+     *
      * @param _sensor_value
      */
-    public void _set_sensor_value( int _sensor_value ){
+    public void _set_sensor_value(int _sensor_value) {
 
         this._sensor_value = _sensor_value;
     }
 
     /**
      * 启动摇一摇传感器
+     *
      * @return
      */
-    public boolean _get_shake(){
+    public boolean _get_shake() {
 
         _reset_shake();
 
-        if( null == _manager ){
+        if (null == _manager) {
 
             _manager = ((SensorManager) _context.getSystemService(_context.SENSOR_SERVICE));
 
-            if( null == _manager){
+            if (null == _manager) {
 
                 return false;
             }
         }
 
-        if(null == _accelerometer){
+        if (null == _accelerometer) {
 
             _accelerometer = _manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-            if(null == _accelerometer){
+            if (null == _accelerometer) {
 
                 return false;
             }
@@ -106,14 +114,15 @@ public class ShakeUtil {
                             .abs(z) > _sensor_value) && !_shake_state) {
 
                         _shake_state = true;
-                        _intent.putExtra(SHAKE_BR_PARAM,1);
+                        _intent.putExtra(SHAKE_BR_PARAM, 1);
                         _context.sendBroadcast(_intent);
                     }
                 }
             }
 
             @Override
-            public void onAccuracyChanged(Sensor sensor, int i) {}
+            public void onAccuracyChanged(Sensor sensor, int i) {
+            }
         };
 
         _manager.registerListener(_sensor_listener, _accelerometer, SensorManager.SENSOR_DELAY_UI);
@@ -124,19 +133,18 @@ public class ShakeUtil {
     /**
      * 重置摇一摇
      */
-    public void _reset_shake(){
+    public void _reset_shake() {
 
         this._shake_state = false;
     }
 
 
     /**
-     *
      * 回收摇一摇传感器
      */
-    public void _destroy_shake(){
+    public void _destroy_shake() {
 
-        if( null!=_manager && null!=_sensor_listener ){
+        if (null != _manager && null != _sensor_listener) {
 
             _manager.unregisterListener(_sensor_listener);
 

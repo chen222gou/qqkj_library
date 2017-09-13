@@ -45,6 +45,13 @@ public class DistanceUtil {
     }
 
 
+
+    public static DistanceUtil getNew(Context _context) {
+
+        return new DistanceUtil(_context);
+    }
+
+
     /**
      * 计算2个经纬度之间的距离
      *

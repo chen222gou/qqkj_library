@@ -42,6 +42,12 @@ public class LocalDataUtil {
     }
 
 
+    public static LocalDataUtil getNew(Context _context){
+
+        return new LocalDataUtil(_context);
+    }
+
+
     /**
      * 存储对象到本地
      *

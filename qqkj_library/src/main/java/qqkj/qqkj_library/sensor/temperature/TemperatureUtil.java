@@ -61,6 +61,12 @@ public class TemperatureUtil {
     }
 
 
+    public static TemperatureUtil getNew(Context _context){
+
+        return new TemperatureUtil(_context);
+    }
+
+
     /**
      * 获取温度传感器
      *
