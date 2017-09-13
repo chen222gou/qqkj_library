@@ -9,6 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by chen2gou on 2017/8/17.
+ * 线程池
  */
 
 public class ThreadPoolUtil {

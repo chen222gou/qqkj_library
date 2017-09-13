@@ -11,7 +11,7 @@ import android.provider.Settings;
 
 /**
  * 获取当前设备的计步器步数
- * Created by apple on 2017/8/17.
+ * Created by chen2gou on 2017/8/17.
  */
 
 public class StepUtil {

@@ -8,13 +8,13 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.Map;
 
-import qqkj.qqkj_library.threadpool.ThreadPoolUtil;
 
 /**
  * 这个类是用来做甚的
@@ -28,7 +28,7 @@ public class NetWorkUtil {
 
     public static final String REQUEST_CONNECT_ERROR = "qqkj_network_disconnect";
 
-    public static final String LOG_TAG = "qqkj_network";
+    public static final String LOG_TAG = "qqkj_frame";
 
     private String _response_result = null;
 
@@ -87,7 +87,7 @@ public class NetWorkUtil {
 
             _connection.setRequestProperty("connection", "keep-alive");  //减少tcp连接次数
 
-            _connection.setRequestProperty("Charset","utf-8");
+            _connection.setRequestProperty("Charset", "utf-8");
 
             _connection.connect();
 
@@ -125,13 +125,12 @@ public class NetWorkUtil {
 
 
     /**
-     *
      * @param _request_url
      * @param _param_condition
      * @param _request_log
      * @return
      */
-    public String get_http_post(final String _request_url, final Map<String,Object> _param_condition, final boolean _request_log) {
+    public String get_http_post(final String _request_url, final Map<String, Object> _param_condition,final boolean _request_log) {
 
         try {
 
@@ -141,7 +140,7 @@ public class NetWorkUtil {
 
             if (_connection == null) {
 
-                network_log(_request_log,"请求失败,HttpURLConnection为空,请检查您的URL...");
+                network_log(_request_log, "请求失败,HttpURLConnection为空,请检查您的URL...");
 
                 return REQUEST_CONNECT_ERROR;
             }
@@ -154,50 +153,38 @@ public class NetWorkUtil {
 
             _connection.setUseCaches(false);
 
-            _connection.setConnectTimeout(5*1000);
+            _connection.setConnectTimeout(5 * 1000);
 
-            _connection.setReadTimeout(5*1000);
+            _connection.setReadTimeout(5 * 1000);
 
             _connection.setInstanceFollowRedirects(true);   //设置是否自动处理重定向
 
-            _connection.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+            _connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
-            _connection.setRequestProperty("Charset","utf-8");
+            _connection.setRequestProperty("Charset", "utf-8");
 
-            _connection.setRequestProperty("connection","keep-alive");
+            _connection.setRequestProperty("connection", "keep-alive");
 
             _connection.connect();
 
-            //处理参数
-            DataOutputStream _out_stream = new DataOutputStream(_connection.getOutputStream());
+            //提交参数
+            do_post_param(_connection.getOutputStream(), _param_condition);
 
-            StringBuffer sb = new StringBuffer();
+            int _response_code = _connection.getResponseCode();
 
-            String str = "";
+            if (HttpURLConnection.HTTP_OK == _response_code) {
 
-            if (_param_condition != null && _param_condition.size() > 0) {
+                network_log(_request_log, "请求成功,返回内容如下...");
 
-                Iterator<String> it = _param_condition.keySet().iterator();
+                _input_stream = _connection.getInputStream();
 
-                while (it.hasNext()) {
+                _response_result = convert_stream_to_string(_input_stream);
 
-                    String key = it.next();
+                network_log(_request_log, _response_result);
+            } else {
 
-                    String value = _param_condition.get(key).toString();
-
-                    sb.append(key + "=" + URLEncoder.encode(value, "utf-8") + "&");
-                }
-                if (sb.length() != 0) {
-
-                    str = sb.substring(0, sb.length());
-                }
+                network_log(_request_log, "请求失败,返回Code:" + _response_code);
             }
-
-            _out_stream.writeBytes(str);
-
-            _out_stream.flush();
-
-            _out_stream.close();
         } catch (Exception e) {
 
             network_log(_request_log, "请求错误,返回如下异常...");
@@ -215,12 +202,55 @@ public class NetWorkUtil {
 
 
     /**
+     * 处理post提交参数
+     *
+     * @param _out_stream_param
+     * @param _param_condition
+     * @throws Exception
+     */
+    private void do_post_param(OutputStream _out_stream_param, Map<String, Object> _param_condition) throws Exception {
+
+        //处理参数
+        DataOutputStream _out_stream = new DataOutputStream(_out_stream_param);
+
+        StringBuffer sb = new StringBuffer();
+
+        String str = "";
+
+        if (_param_condition != null && _param_condition.size() > 0) {
+
+            Iterator<String> it = _param_condition.keySet().iterator();
+
+            while (it.hasNext()) {
+
+                String key = it.next();
+
+                String value = _param_condition.get(key).toString();
+
+                sb.append(key + "=" + URLEncoder.encode(value, "utf-8") + "&");
+            }
+
+            if (sb.length() != 0) {
+
+                str = sb.substring(0, sb.length());
+            }
+        }
+
+        _out_stream.writeBytes(str);
+
+        _out_stream.flush();
+
+        _out_stream.close();
+    }
+
+
+    /**
      * 将输入流转换成String
      *
      * @param _input_stream
      * @return
      */
-    public String convert_stream_to_string(InputStream _input_stream) {
+    private String convert_stream_to_string(InputStream _input_stream) {
 
         BufferedReader _buffer_reader = new BufferedReader(new InputStreamReader(_input_stream));
 
@@ -237,6 +267,7 @@ public class NetWorkUtil {
 
             e.printStackTrace();
         } finally {
+
             try {
 
                 _input_stream.close();
