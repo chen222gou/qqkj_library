@@ -1,4 +1,4 @@
-package qqkj.qqkj_library.network;
+package qqkj.qqkj_library.network.http;
 
 
 import android.util.Log;
@@ -11,20 +11,18 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Iterator;
-import java.util.Map;
 
 
 /**
  * 这个类是用来做甚的
+ * 网络请求
  * <p>
  * Created by 陈二狗 on 2017/9/11.
  */
 
-public class NetWorkUtil {
+public class HttpRequestUtil {
 
-    private static NetWorkUtil _get_network_util;
+    private static HttpRequestUtil _get_http_request_util;
 
     public static final String REQUEST_CONNECT_ERROR = "qqkj_network_disconnect";
 
@@ -45,11 +43,11 @@ public class NetWorkUtil {
      *
      * @return
      */
-    public static NetWorkUtil getIns() {
+    public static HttpRequestUtil getIns() {
 
-        _get_network_util = new NetWorkUtil();
+        _get_http_request_util = new HttpRequestUtil();
 
-        return _get_network_util;
+        return _get_http_request_util;
     }
 
 
@@ -125,12 +123,13 @@ public class NetWorkUtil {
 
 
     /**
+     * http post 请求
      * @param _request_url
-     * @param _param_condition
+     * @param _string_param
      * @param _request_log
      * @return
      */
-    public String get_http_post(final String _request_url, final Map<String, Object> _param_condition,final boolean _request_log) {
+    public String get_http_post(final String _request_url, final String _string_param,final boolean _request_log) {
 
         try {
 
@@ -168,7 +167,7 @@ public class NetWorkUtil {
             _connection.connect();
 
             //提交参数
-            do_post_param(_connection.getOutputStream(), _param_condition);
+            do_post_param(_connection.getOutputStream(), _string_param);
 
             int _response_code = _connection.getResponseCode();
 
@@ -205,38 +204,15 @@ public class NetWorkUtil {
      * 处理post提交参数
      *
      * @param _out_stream_param
-     * @param _param_condition
+     * @param _string_param
      * @throws Exception
      */
-    private void do_post_param(OutputStream _out_stream_param, Map<String, Object> _param_condition) throws Exception {
+    private void do_post_param(OutputStream _out_stream_param, String _string_param) throws Exception {
 
         //处理参数
         DataOutputStream _out_stream = new DataOutputStream(_out_stream_param);
 
-        StringBuffer sb = new StringBuffer();
-
-        String str = "";
-
-        if (_param_condition != null && _param_condition.size() > 0) {
-
-            Iterator<String> it = _param_condition.keySet().iterator();
-
-            while (it.hasNext()) {
-
-                String key = it.next();
-
-                String value = _param_condition.get(key).toString();
-
-                sb.append(key + "=" + URLEncoder.encode(value, "utf-8") + "&");
-            }
-
-            if (sb.length() != 0) {
-
-                str = sb.substring(0, sb.length());
-            }
-        }
-
-        _out_stream.writeBytes(str);
+        _out_stream.writeBytes(_string_param);
 
         _out_stream.flush();
 

@@ -1,4 +1,4 @@
-package qqkj.qqkj_library.json;
+package qqkj.qqkj_library.network.parser.json;
 
 import com.google.gson.Gson;
 
@@ -17,9 +17,9 @@ public class JsonUtil {
     private Object _object_result = null;
 
 
-    public static JsonUtil getIns(){
+    public static JsonUtil getIns() {
 
-        if(_json_util == null){
+        if (_json_util == null) {
 
             _json_util = new JsonUtil();
         }
@@ -30,11 +30,12 @@ public class JsonUtil {
 
     /**
      * 字符串解析JSON
+     *
      * @param _json_param
      * @param _object_param
      * @return
      */
-    public Object _get_json_to_object(String _json_param, Object _object_param){
+    public Object _get_json_to_object(String _json_param, Object _object_param) {
 
         _gson = new Gson();
 
@@ -46,10 +47,11 @@ public class JsonUtil {
 
     /**
      * 将Object解析为Json
+     *
      * @param _object_param
      * @return
      */
-    public String _get_object_to_json(Object _object_param){
+    public String _get_object_to_json(Object _object_param) {
 
         return _gson.toJson(_object_param);
     }
