@@ -40,6 +40,8 @@ public class StepUtil {
 
     private long _system_time = 0l;
 
+    private StepListener _step_listener = null;
+
     /**
      * 默认模式构造函数
      *
@@ -118,9 +120,11 @@ public class StepUtil {
      * 返回false,表示用户没有传感器,返回true,可以开始进行计步
      */
 
-    public boolean _get_step() {
+    public boolean _get_step(final StepListener _step_listener) {
 
         //初始化计步器模块
+
+        this._step_listener = _step_listener;
 
         if (null == _manager) {
 
@@ -196,6 +200,9 @@ public class StepUtil {
                 //默认模式
                 _intent.putExtra(STEP_BR_PARAM, String.valueOf(_step));
                 _context.sendBroadcast(_intent);
+
+                _step_listener.get_step(_step);
+
             }
 
         }
@@ -242,6 +249,8 @@ public class StepUtil {
                     //默认模式
                     _intent.putExtra(STEP_BR_PARAM, String.valueOf(_step));
                     _context.sendBroadcast(_intent);
+
+                    _step_listener.get_step(_step);
                 }
 
             }
@@ -264,6 +273,8 @@ public class StepUtil {
             //发送计步数据
             _intent.putExtra(STEP_BR_PARAM, String.valueOf(_step_sum));
             _context.sendBroadcast(_intent);
+
+            _step_listener.get_step(_step_sum);
 
             //清空之前积累步数
             _step_sum = 0;
@@ -301,5 +312,14 @@ public class StepUtil {
         _sensor_step = null;
 
         _manager = null;
+    }
+
+
+    /**
+     * 计步器回调函数
+     */
+    public interface StepListener{
+
+        public void get_step(int _step);
     }
 }

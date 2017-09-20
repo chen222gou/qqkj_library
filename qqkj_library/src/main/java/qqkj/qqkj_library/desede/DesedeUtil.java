@@ -1,8 +1,12 @@
 package qqkj.qqkj_library.desede;
 
-import android.util.Base64;
+import org.json.JSONObject;
 
 import java.security.Key;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKeyFactory;
@@ -26,12 +30,43 @@ public class DesedeUtil {
 
     private static final char[] _legal_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".toCharArray();
 
+    private Map<String, Object> _base_param = new HashMap<>();
+
+    private JSONObject _json_object = null;
+
+    private List<String> _list_param = null;
+
 
     public static DesedeUtil getIns() {
 
         if (_desede_util == null) {
 
             _desede_util = new DesedeUtil();
+        }
+
+        return _desede_util;
+    }
+
+
+    /**
+     * 设置3DES默认参数
+     *
+     * @param _param_name
+     * @param _param_value
+     * @return
+     */
+    public DesedeUtil set_3des_param(String[] _param_name, String[] _param_value) {
+
+        _list_param = new ArrayList<>();
+
+        if (_param_name.length > 0 && _param_value.length > 0 && _param_name.length == _param_value.length) {
+
+            for (int _i = 0; _i < _param_name.length; _i++) {
+
+                _list_param.add(_param_name[_i]);
+
+                _base_param.put(_param_name[_i], _param_value[_i]);
+            }
         }
 
         return _desede_util;
@@ -67,12 +102,22 @@ public class DesedeUtil {
 
         _3des_result = encode(_encrypt_data);
 
+        if (_base_param.size() > 0) {
+
+            _base_param.put(_list_param.get(_list_param.size() - 1), _3des_result);
+
+            _json_object = new JSONObject(_base_param);
+
+            return _json_object.toString();
+        }
+
         return _3des_result;
     }
 
 
     /**
      * byte数组转base64
+     *
      * @param _data
      * @return
      */

@@ -21,6 +21,7 @@ public class HttpParamUtil {
     private static HttpParamUtil _http_param_util = null;
 
 
+
     public static HttpParamUtil getIns() {
 
         _http_param_util = new HttpParamUtil();

@@ -6,6 +6,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Handler;
 
 /**
  * Created by chen2gou on 2017/8/17.
@@ -32,6 +33,8 @@ public class ShakeUtil {
     private int _sensor_value = 16;
 
     private Sensor _accelerometer = null;
+
+    private Handler _time_handler = new Handler();
 
 
     public ShakeUtil(Context _context) {
@@ -71,9 +74,7 @@ public class ShakeUtil {
      *
      * @return
      */
-    public boolean _get_shake() {
-
-        _reset_shake();
+    public boolean _get_shake(final ShakeListener _shake_listener) {
 
         if (null == _manager) {
 
@@ -116,6 +117,8 @@ public class ShakeUtil {
                         _shake_state = true;
                         _intent.putExtra(SHAKE_BR_PARAM, 1);
                         _context.sendBroadcast(_intent);
+
+                        _shake_listener.get_shake(1);
                     }
                 }
             }
@@ -132,10 +135,18 @@ public class ShakeUtil {
 
     /**
      * 重置摇一摇
+     * @param _shake_time   摇一摇间隔时间
      */
-    public void _reset_shake() {
+    public void _reset_shake(int _shake_time) {
 
-        this._shake_state = false;
+        _time_handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                _shake_state = false;
+            }
+        },_shake_time);
+
     }
 
 
@@ -152,5 +163,14 @@ public class ShakeUtil {
 
             _manager = null;
         }
+    }
+
+
+    /**
+     * 摇一摇回调函数
+     */
+    public interface ShakeListener{
+
+        public void get_shake(int _shake);
     }
 }

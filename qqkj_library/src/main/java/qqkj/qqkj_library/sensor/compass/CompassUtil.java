@@ -88,7 +88,7 @@ public class CompassUtil {
      *
      * @return
      */
-    public boolean _get_compass() {
+    public boolean _get_compass(final CompassListener _compass_listener) {
 
         if (null == _sensor_manager) {
 
@@ -154,6 +154,8 @@ public class CompassUtil {
                 _intent.putExtra(COMPASS_BR_PARAM, String.valueOf(_result_value));
 
                 _context.sendBroadcast(_intent);
+
+                _compass_listener.get_compass(_result_value);
             }
 
             @Override
@@ -164,6 +166,15 @@ public class CompassUtil {
                     _intent_accuracy.putExtra(COMPASS_ACCURACY_CHANGE_BR_PARAM, true);
 
                     _context.sendBroadcast(_intent_accuracy);
+
+                    _compass_listener.get_accuracy(true);
+                }else{
+
+                    _intent_accuracy.putExtra(COMPASS_ACCURACY_CHANGE_BR_PARAM, false);
+
+                    _context.sendBroadcast(_intent_accuracy);
+
+                    _compass_listener.get_accuracy(false);
                 }
             }
         };
@@ -191,5 +202,16 @@ public class CompassUtil {
 
             _sensor_manager = null;
         }
+    }
+
+
+    /**
+     * 指南针度数回调
+     */
+    public interface CompassListener{
+
+        public void get_compass(int _compass);
+
+        public void get_accuracy(boolean _accuracy);
     }
 }

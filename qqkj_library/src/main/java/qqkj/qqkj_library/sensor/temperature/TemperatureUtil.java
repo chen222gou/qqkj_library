@@ -72,7 +72,7 @@ public class TemperatureUtil {
      *
      * @return
      */
-    public boolean _get_temperature() {
+    public boolean _get_temperature(final TemperatureListener _temperature_listener) {
 
         if (null == _sensor_manager) {
 
@@ -107,6 +107,8 @@ public class TemperatureUtil {
 
                 _intent.putExtra(TEMPERATURE_BR_PARAM, String.valueOf(_value));
                 _context.sendBroadcast(_intent);
+
+                _temperature_listener.get_temperature(_value);
             }
 
             @Override
@@ -133,5 +135,11 @@ public class TemperatureUtil {
 
             _sensor_manager = null;
         }
+    }
+
+
+    public interface TemperatureListener{
+
+        public void get_temperature(int _temperature);
     }
 }
