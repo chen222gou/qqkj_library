@@ -38,6 +38,7 @@ dependencies {
     //自动布局
     compile 'com.zhy:autolayout:1.4.5'
     compile 'com.google.code.gson:gson:2.8.1'
+    compile 'com.android.support:multidex:1.0.1'
     //阿里云推送
 //    compile 'com.aliyun.ams:alicloud-android-push:2.3.7'
 //    compile 'com.aliyun.ams:alicloud-android-third-push:3.0.3@aar'
