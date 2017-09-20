@@ -18,10 +18,10 @@ public class HttpParamUtil {
 
     private static final String LOG_TAG = "qqkj_frame";
 
-    private HttpParamUtil _http_param_util = null;
+    private static HttpParamUtil _http_param_util = null;
 
 
-    public HttpParamUtil getIns() {
+    public static HttpParamUtil getIns() {
 
         _http_param_util = new HttpParamUtil();
 
@@ -41,7 +41,7 @@ public class HttpParamUtil {
 
             try {
 
-                _result_param = URLEncoder.encode(_string_param, "utf-8");
+                _result_param = new String(_string_param.getBytes(), "utf-8");
 
             } catch (Exception e) {
 

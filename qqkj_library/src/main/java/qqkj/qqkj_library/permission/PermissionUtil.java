@@ -57,9 +57,9 @@ public class PermissionUtil {
      * @param _premissions
      * @param _req_code
      */
-    public void _req_premission(String[] _premissions, int _req_code) {
+    public boolean _req_premission(String[] _premissions, int _req_code) {
 
-        boolean _is_req = false;
+        boolean _is_req = true;
 
         for (int i = 0; i < _premissions.length; i++) {
 
@@ -67,17 +67,19 @@ public class PermissionUtil {
                     _premissions[i])
                     != PackageManager.PERMISSION_GRANTED) {
 
-                _is_req = true;
+                _is_req = false;
 
                 break;
             }
         }
 
-        if (_is_req) {
+        if (!_is_req) {
 
             ActivityCompat.requestPermissions(_context, _premissions,
                     _req_code);
         }
+
+        return _is_req;
     }
 
 
