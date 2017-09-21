@@ -82,7 +82,7 @@ public class HttpUploadUtil {
      * @param _request_log
      * @return
      */
-    public HttpUploadModel _get_http_upload(Context _context, final String _request_url, final String _file_key, final String _file_path, final boolean _request_log, UploadProgressListener _listener) {
+    public HttpUploadModel _get_http_upload(Context _context, final String _request_url, final String _file_key, final String _file_path, final boolean _request_log, HttpUploadListener _listener) {
 
         this._context = _context;
 
@@ -200,7 +200,7 @@ public class HttpUploadUtil {
      */
     public List<HttpUploadModel> _get_http_upload_more(Context _context, final String _request_url, final String[] _file_key,
 
-                                                       final String[] _file_path, final boolean _request_log, UploadProgressListener _listener) {
+                                                       final String[] _file_path, final boolean _request_log, HttpUploadListener _listener) {
 
         List<HttpUploadModel> _list = new ArrayList<>();
 
@@ -230,7 +230,7 @@ public class HttpUploadUtil {
      *
      * @param _progress
      */
-    private void _set_progress(boolean _request_log, int _progress, int _index, UploadProgressListener _listener) {
+    private void _set_progress(boolean _request_log, int _progress, int _index, HttpUploadListener _listener) {
 
         _intent.putExtra(UPLOAD_PREGRESS_BR_PARAM, _progress + "");
 
@@ -248,7 +248,7 @@ public class HttpUploadUtil {
      * @param _out_stream_param
      * @throws Exception
      */
-    private void do_upload_param(OutputStream _out_stream_param, boolean _request_log, UploadProgressListener _listener) throws Exception {
+    private void do_upload_param(OutputStream _out_stream_param, boolean _request_log, HttpUploadListener _listener) throws Exception {
 
         DataOutputStream _out_stream = new DataOutputStream(_out_stream_param);
 
@@ -313,7 +313,7 @@ public class HttpUploadUtil {
     /**
      * 上传回调接口
      */
-    public interface UploadProgressListener {
+    public interface HttpUploadListener {
 
         void get_progress(int _progress, int _index);
     }
