@@ -25,6 +25,10 @@ android {
 allprojects {
     repositories {
         jcenter()
+
+        flatDir {
+            dirs 'src/libs'
+        }
 //        maven {
 //            url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
 //        }
