@@ -39,18 +39,27 @@ dependencies {
     compile 'com.zhy:autolayout:1.4.5'
     compile 'com.google.code.gson:gson:2.8.1'
     compile 'com.android.support:multidex:1.0.1'
+
+    //日志监听
+    compile files('libs/crasheye_2.2.2.jar')
+
+    //logback
+//    compile 'org.slf4j:slf4j-api:1.7.21'
+//    compile 'com.github.tony19:logback-android-core:1.1.1-6'
+//    compile 'com.github.tony19:logback-android-classic:1.1.1-6'
     //阿里云推送
-//    compile 'com.aliyun.ams:alicloud-android-push:2.3.7'
-//    compile 'com.aliyun.ams:alicloud-android-third-push:3.0.3@aar'
-//    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-//    compile 'com.android.support:design:25.3.1'
-//    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-//    compile fileTree(dir: 'libs', include: ['*.jar'])
-//    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-//        exclude group: 'com.android.support', module: 'support-annotations'
-//    })
-//    compile 'com.android.support:appcompat-v7:25.3.1'
-//    testCompile 'junit:junit:4.12'
+    //    compile 'com.aliyun.ams:alicloud-android-push:2.3.7'
+    //    compile 'com.aliyun.ams:alicloud-android-third-push:3.0.3@aar'
+    //    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    //    compile 'com.android.support:design:25.3.1'
+    //    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    //    compile fileTree(dir: 'libs', include: ['*.jar'])
+    //    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    //        exclude group: 'com.android.support', module: 'support-annotations'
+    //    })
+    //    compile 'com.android.support:appcompat-v7:25.3.1'
+    //    testCompile 'junit:junit:4.12'
+
 }
 repositories {
     mavenCentral()
