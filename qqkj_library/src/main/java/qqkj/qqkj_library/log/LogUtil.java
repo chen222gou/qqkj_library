@@ -1,6 +1,7 @@
 package qqkj.qqkj_library.log;
 
 import android.content.Context;
+
 import com.xsj.crasheye.Crasheye;
 
 /**
@@ -9,7 +10,7 @@ import com.xsj.crasheye.Crasheye;
  * Created by 陈二狗 on 2017/9/22.
  */
 
-public class LogUtil{
+public class LogUtil {
 
     private static LogUtil _log_util = null;
 
@@ -28,7 +29,7 @@ public class LogUtil{
     private Context _context = null;
 
 
-    private LogUtil(Context _context){
+    private LogUtil(Context _context) {
 
         this._context = _context;
     }
@@ -47,11 +48,16 @@ public class LogUtil{
     /**
      * 开启监听LOG
      */
-    public void get_base_log(boolean _start_log){
+    public void get_base_log(boolean _start_log, String _user_id) {
 
-        if(_start_log){
+        if (_start_log) {
 
             Crasheye.setChannelID(BASE_LOG_KEY);
+
+            if (null != _user_id && _user_id.length() > 0) {
+
+                Crasheye.addExtraData("user_id", _user_id);
+            }
 
             Crasheye.init(_context, BASE_LOG_KEY);
         }
@@ -59,11 +65,16 @@ public class LogUtil{
     }
 
 
-    public void get_tangdao_log(boolean _start_log){
+    public void get_tangdao_log(boolean _start_log, String _user_id) {
 
-        if(_start_log){
+        if (_start_log) {
 
             Crasheye.setChannelID(TANGDAO_LOG_KEY);
+
+            if (null != _user_id && _user_id.length() > 0) {
+
+                Crasheye.addExtraData("user_id", _user_id);
+            }
 
             Crasheye.init(_context, TANGDAO_LOG_KEY);
         }
@@ -71,11 +82,16 @@ public class LogUtil{
     }
 
 
-    public void get_aquacity_log(boolean _start_log){
+    public void get_aquacity_log(boolean _start_log, String _user_id) {
 
-        if(_start_log){
+        if (_start_log) {
 
             Crasheye.setChannelID(AQUACITY_LOG_KEY);
+
+            if (null != _user_id && _user_id.length() > 0) {
+
+                Crasheye.addExtraData("user_id", _user_id);
+            }
 
             Crasheye.init(_context, AQUACITY_LOG_KEY);
         }
@@ -83,11 +99,16 @@ public class LogUtil{
     }
 
 
-    public void get_luckey_log(boolean _start_log){
+    public void get_luckey_log(boolean _start_log, String _user_id) {
 
-        if(_start_log){
+        if (_start_log) {
 
             Crasheye.setChannelID(LUCKY_LOG_KEY);
+
+            if (null != _user_id && _user_id.length() > 0) {
+
+                Crasheye.addExtraData("user_id", _user_id);
+            }
 
             Crasheye.init(_context, LUCKY_LOG_KEY);
         }
@@ -95,11 +116,16 @@ public class LogUtil{
     }
 
 
-    public void get_jw_log(boolean _start_log){
+    public void get_jw_log(boolean _start_log, String _user_id) {
 
-        if(_start_log){
+        if (_start_log) {
 
             Crasheye.setChannelID(JIUWU_LOG_KEY);
+
+            if (null != _user_id && _user_id.length() > 0) {
+
+                Crasheye.addExtraData("user_id", _user_id);
+            }
 
             Crasheye.init(_context, JIUWU_LOG_KEY);
         }
@@ -107,11 +133,16 @@ public class LogUtil{
     }
 
 
-    public void get_quanquan_log(boolean _start_log){
+    public void get_quanquan_log(boolean _start_log, String _user_id) {
 
-        if(_start_log){
+        if (_start_log) {
 
             Crasheye.setChannelID(QUANQUAN_LOG_KEY);
+
+            if (null != _user_id && _user_id.length() > 0) {
+
+                Crasheye.addExtraData("user_id", _user_id);
+            }
 
             Crasheye.init(_context, QUANQUAN_LOG_KEY);
         }

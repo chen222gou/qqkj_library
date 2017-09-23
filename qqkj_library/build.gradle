@@ -41,7 +41,7 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
 
     //日志监听
-    compile files('libs/crasheye_2.2.2.jar')
+    compile files('src/libs/crasheye_2.2.2.jar')
 
     //logback
 //    compile 'org.slf4j:slf4j-api:1.7.21'
