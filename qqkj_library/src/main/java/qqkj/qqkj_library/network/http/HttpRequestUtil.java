@@ -1,7 +1,6 @@
 package qqkj.qqkj_library.network.http;
 
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.io.BufferedReader;
