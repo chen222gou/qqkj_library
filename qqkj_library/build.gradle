@@ -36,21 +36,35 @@ allprojects {
 }
 
 dependencies {
+
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:design:26.+'
     compile 'com.android.support:support-v4:26.+'
+
     //自动布局
     compile 'com.zhy:autolayout:1.4.5'
+
+    //gson解析包
     compile 'com.google.code.gson:gson:2.8.1'
+
+    //apk分包
     compile 'com.android.support:multidex:1.0.1'
 
     //日志监听
     compile files('src/libs/crasheye_2.2.2.jar')
 
+    //上拉/下滑刷新布局
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-alpha-0'
+    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-alpha-0'
+
+    //网络/本地图片加载
+    compile files('src/libs/universal-image-loader-1.9.4.jar')
+
+    //
     //logback
-//    compile 'org.slf4j:slf4j-api:1.7.21'
-//    compile 'com.github.tony19:logback-android-core:1.1.1-6'
-//    compile 'com.github.tony19:logback-android-classic:1.1.1-6'
+    //    compile 'org.slf4j:slf4j-api:1.7.21'
+    //    compile 'com.github.tony19:logback-android-core:1.1.1-6'
+    //    compile 'com.github.tony19:logback-android-classic:1.1.1-6'
     //阿里云推送
     //    compile 'com.aliyun.ams:alicloud-android-push:2.3.7'
     //    compile 'com.aliyun.ams:alicloud-android-third-push:3.0.3@aar'
