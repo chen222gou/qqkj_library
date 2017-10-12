@@ -44,6 +44,25 @@ public class LogUtil {
         return _log_util;
     }
 
+    /**
+     * 开启监听LOG
+     */
+    public void get_other_log(boolean _start_log, String _other_key, String _user_id) {
+
+        if (_start_log) {
+
+            Crasheye.setChannelID(BASE_LOG_KEY);
+
+            if (null != _user_id && _user_id.length() > 0) {
+
+                Crasheye.addExtraData("user_id", _user_id);
+            }
+
+            Crasheye.init(_context, _other_key);
+        }
+
+    }
+
 
     /**
      * 开启监听LOG
