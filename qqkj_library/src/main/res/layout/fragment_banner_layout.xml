@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
+    >
+
+    <qqkj.qqkj_library.view.banner.BannerUtil
+        android:id="@+id/_base_banner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        ptr:AutoPlayTime="3000"
+        ptr:isShowIndicatorOnlyOne="false"
+        ptr:pageChangeDuration="800"
+        ptr:pointNormal="@drawable/banner_shape_normal"
+        ptr:pointSelect="@drawable/banner_shape_select"
+        ptr:pointsContainerBackground="@null"
+        ptr:pointsPosition="CENTER"
+        ptr:tipTextSize="12sp" />
+</RelativeLayout>

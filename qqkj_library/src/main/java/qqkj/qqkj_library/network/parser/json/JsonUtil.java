@@ -53,6 +53,8 @@ public class JsonUtil {
      */
     public String _get_object_to_json(Object _object_param) {
 
+        _gson = new Gson();
+
         return _gson.toJson(_object_param);
     }
 }
