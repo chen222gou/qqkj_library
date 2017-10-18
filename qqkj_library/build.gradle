@@ -54,6 +54,8 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     //Banner
     compile 'com.xhb:xbanner:1.3.0'
+    //二维码扫描
+    compile files('src/libs/zxing.jar')
 //        compile files('src/libs/universal-image-loader-1.9.4.jar')
     //
     //logback
