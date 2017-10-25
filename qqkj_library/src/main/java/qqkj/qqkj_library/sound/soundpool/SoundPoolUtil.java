@@ -58,7 +58,7 @@ public class SoundPoolUtil {
 
                 for (int i = 0; i < _sounds.length; i++) {
 
-                    _sound_map.put(0, _sound_pool.load(_context, _sounds[i], 1));
+                    _sound_map.put(i, _sound_pool.load(_context, _sounds[i], 1));
                 }
             }
         });

@@ -30,7 +30,7 @@ public class VibrateUtil {
      * 初始化震动 Application
      * @param _context
      */
-    public void _init_vibarate(Context _context){
+    public void _init_vibrate(Context _context){
 
         _vibrator = (Vibrator) _context.getSystemService(Context.VIBRATOR_SERVICE);
     }
