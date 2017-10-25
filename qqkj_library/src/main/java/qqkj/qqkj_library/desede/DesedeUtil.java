@@ -55,7 +55,7 @@ public class DesedeUtil {
      * @param _param_value
      * @return
      */
-    public DesedeUtil set_3des_param(String[] _param_name, String[] _param_value) {
+    public DesedeUtil _init_3des_param(String[] _param_name, String[] _param_value) {
 
         _list_param = new ArrayList<>();
 

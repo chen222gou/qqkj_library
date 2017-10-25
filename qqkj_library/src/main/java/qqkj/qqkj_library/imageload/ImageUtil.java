@@ -66,7 +66,7 @@ public class ImageUtil {
     /**
      * 初始化
      */
-    public void _get_init(Context _context){
+    public void _init_image(Context _context){
 
         _image_loader = ImageLoader.getInstance();
 
