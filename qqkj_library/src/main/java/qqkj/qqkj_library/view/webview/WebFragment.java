@@ -8,6 +8,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -146,6 +147,17 @@ public class WebFragment extends Fragment {
         _web_setting.setAllowFileAccessFromFileURLs(true);
 
         _web_setting.setCacheMode(WebSettings.LOAD_NO_CACHE);
+
+        _web_view.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                // TODO 自动生成的方法存根
+
+                if(newProgress==100){
+                    _web_view.setVisibility(View.VISIBLE);//加载完网页进度条消失
+                }
+            }
+        });
 
     }
 
