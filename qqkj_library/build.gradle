@@ -24,7 +24,7 @@ android {
 
 allprojects {
     repositories {
-        google()
+//        google()
         jcenter()
 
         flatDir {
