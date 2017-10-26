@@ -104,6 +104,18 @@ public class WebFragment extends Fragment {
     }
 
 
+    public void set_go_back(){
+
+        if(_web_view.canGoBack()){
+
+            _web_view.goBack();
+        }else{
+
+            getActivity().finish();
+        }
+    }
+
+
     /**
      * 设置WebView属性
      */
