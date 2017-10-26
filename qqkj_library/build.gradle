@@ -45,7 +45,7 @@ dependencies {
     //gson解析包
     compile 'com.google.code.gson:gson:2.8.1'
     //apk分包
-    compile 'com.android.support:multidex:1.0.2'
+    compile 'com.android.support:multidex:1.0.1'
     //日志监听
     compile files('src/libs/crasheye_2.2.2.jar')
     //上拉/下滑刷新布局
@@ -81,5 +81,5 @@ dependencies {
 }
 repositories {
     mavenCentral()
-    google()
+//    google()
 }
