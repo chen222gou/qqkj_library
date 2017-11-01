@@ -2,8 +2,34 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="qqkj.qqkj_library">
 
+    <!-- 用于手机自带硬件计步器 -->
+    <uses-feature
+        android:name="android.hardware.sensor.stepcounter"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.sensor.stepdetector"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
-        android:label="@string/app_name" />
+        android:label="@string/app_name" >
+
+        <!-- 支付宝支付配置Activity -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.app.H5AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+
+    </application>
 
 </manifest>

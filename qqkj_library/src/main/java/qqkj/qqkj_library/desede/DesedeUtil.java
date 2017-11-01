@@ -74,6 +74,7 @@ public class DesedeUtil {
 
 
     /**
+     * 获取3DES加密后字符串
      * @param _string_param
      * @param _encode       //与服务器端统一编码
      * @param _secret_key   //安全key
