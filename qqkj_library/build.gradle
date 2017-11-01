@@ -40,6 +40,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25+'
     compile 'com.android.support:design:25+'
     compile 'com.android.support:support-v4:25+'
+
     //自动布局
     compile 'com.zhy:autolayout:1.4.5'
     //gson解析包
@@ -58,7 +59,7 @@ dependencies {
     //二维码扫描
     compile files('src/libs/zxing.jar')
     //支付宝支付
-//    compile files('src/libs/alipaySDK-20151014.jar')
+    compile files('src/libs/alipaySdk-20170922.jar')
 //        compile files('src/libs/universal-image-loader-1.9.4.jar')
     //
     //logback
