@@ -1,6 +1,7 @@
 package qqkj.qqkj_library.pay.alipay;
 
 import android.app.Activity;
+import android.text.TextUtils;
 
 import com.alipay.sdk.app.PayTask;
 
@@ -39,6 +40,11 @@ public class AliPayUtil {
         PayTask _alipay = new PayTask(_context);
 
         PayResult _result = new PayResult(_alipay.payV2(_order_info, true));
+
+        if(TextUtils.equals("9000",_result.getResultStatus())){
+
+            _result.paySuccess = true;
+        }
 
         return _result;
     }
