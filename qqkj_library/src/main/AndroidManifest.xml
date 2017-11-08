@@ -30,6 +30,9 @@
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
 
+        <!-- 二维码扫描Activity -->
+        <activity android:name=".zxing.ZxingActivity"/>
+
     </application>
 
 </manifest>

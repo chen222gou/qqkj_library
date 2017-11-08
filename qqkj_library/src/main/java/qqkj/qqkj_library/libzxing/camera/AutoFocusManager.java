@@ -112,7 +112,7 @@ public class AutoFocusManager implements Camera.AutoFocusCallback {
             try {
                 camera.cancelAutoFocus();
             } catch (RuntimeException re) {
-                // Have heard RuntimeException reported in Android 4.0.x+;
+                // Have heard RuntimeException reported in Android 4.0.x+;[
                 // continue?
                 Log.w(TAG, "Unexpected exception while cancelling focusing", re);
             }

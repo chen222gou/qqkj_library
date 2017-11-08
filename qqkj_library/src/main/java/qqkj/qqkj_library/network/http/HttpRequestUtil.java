@@ -52,8 +52,6 @@ public class HttpRequestUtil {
 
     /**
      * 单例
-     *
-     * @return
      */
     public static HttpRequestUtil getIns() {
 

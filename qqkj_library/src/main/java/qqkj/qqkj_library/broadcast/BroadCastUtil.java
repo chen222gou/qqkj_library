@@ -26,12 +26,7 @@ public class BroadCastUtil {
 
     public static BroadCastUtil getIns(Context _context){
 
-        if(_broadcast_util == null){
-
-            _broadcast_util = new BroadCastUtil(_context);
-        }
-
-        return _broadcast_util;
+        return new BroadCastUtil(_context);
     }
 
 
@@ -45,5 +40,18 @@ public class BroadCastUtil {
         IntentFilter _intent_filter = new IntentFilter(_br_name);
 
         _context.registerReceiver(_br,_intent_filter);
+    }
+
+
+    /**
+     * 反注册广播
+     * @param _br
+     */
+    public void _get_un_broadcast(BroadcastReceiver _br){
+
+        if(null != _br){
+
+            _context.unregisterReceiver(_br);
+        }
     }
 }
