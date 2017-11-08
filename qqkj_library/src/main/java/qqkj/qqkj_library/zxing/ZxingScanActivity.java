@@ -63,7 +63,7 @@ public abstract class ZxingScanActivity extends AppCompatActivity {
         _get_scan_br_result();
 
         //开启光线感应器,根据光线强度自动打开闪光灯
-        if(_open_auto_light){
+        if (_open_auto_light) {
 
             //打开闪光灯
             _get_scan_light();
@@ -90,18 +90,19 @@ public abstract class ZxingScanActivity extends AppCompatActivity {
 
     /**
      * 光线传感器回调
-     * @param _light_sensor     手机是否存在光线传感器
-     * @param _light            true,表示有光线,false 表示光线暗
+     *
+     * @param _light_sensor 手机是否存在光线传感器
+     * @param _light        true,表示有光线,false 表示光线暗
      */
     public abstract void _get_light_result(boolean _light_sensor, boolean _light);
 
 
-
     /**
      * 获取扫描View
+     *
      * @return
      */
-    public DecoratedBarcodeView _find_decorated_bar_code_view(){
+    public DecoratedBarcodeView _find_decorated_bar_code_view() {
 
         return (DecoratedBarcodeView) findViewById(R.id._barcode_view);
     }
@@ -109,6 +110,7 @@ public abstract class ZxingScanActivity extends AppCompatActivity {
 
     /**
      * 初始化扫描
+     *
      * @param savedInstanceState
      */
     private void _set_capture_decode(@Nullable Bundle savedInstanceState) {
@@ -129,7 +131,7 @@ public abstract class ZxingScanActivity extends AppCompatActivity {
         /**
          * 设置为横屏
          */
-        if(getRequestedOrientation()!= ActivityInfo.SCREEN_ORIENTATION_PORTRAIT){
+        if (getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
 
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
@@ -193,9 +195,10 @@ public abstract class ZxingScanActivity extends AppCompatActivity {
 
     /**
      * 返回扫描管理对象,继承类可以根据需求自由操作
+     *
      * @return
      */
-    public CaptureManager _get_captruemanager(){
+    public CaptureManager _get_captruemanager() {
 
         return _capture;
     }
@@ -204,7 +207,7 @@ public abstract class ZxingScanActivity extends AppCompatActivity {
     /**
      * 暂停扫描
      */
-    public void _get_scan_pause(){
+    public void _get_scan_pause() {
 
         _capture.onPause();
     }
@@ -212,7 +215,7 @@ public abstract class ZxingScanActivity extends AppCompatActivity {
     /**
      * 恢复扫描
      */
-    public void _get_scan_resume(){
+    public void _get_scan_resume() {
 
         _capture.onResume();
     }
@@ -221,7 +224,7 @@ public abstract class ZxingScanActivity extends AppCompatActivity {
     /**
      * 打开闪光灯
      */
-    public void _get_scan_light_open(){
+    public void _get_scan_light_open() {
 
         _find_decorated_bar_code_view().setTorchOn();
     }
@@ -230,7 +233,7 @@ public abstract class ZxingScanActivity extends AppCompatActivity {
     /**
      * 关闭闪光灯
      */
-    public void _get_scan_light_close(){
+    public void _get_scan_light_close() {
 
         _find_decorated_bar_code_view().setTorchOff();
     }
@@ -239,7 +242,7 @@ public abstract class ZxingScanActivity extends AppCompatActivity {
     /**
      * 注册广播,用于接收扫描返回值
      */
-    public void _get_scan_br_result(){
+    public void _get_scan_br_result() {
 
         BroadCastUtil.getIns(this)._get_broadcast("_get_scan_result", _br);
     }
@@ -248,17 +251,17 @@ public abstract class ZxingScanActivity extends AppCompatActivity {
     /**
      * 开启光线感应器,根据光线强度选择是否打开闪光灯
      */
-    public void _get_scan_light(){
+    public void _get_scan_light() {
 
         boolean _light = LightUtil.getIns(getBaseContext())._get_light(new LightUtil.LightListener() {
             @Override
             public void get_light(boolean _light) {
 
                 //_light = true 表示光线OK, _light = false 表示光线暗
-                if(_light){
+                if (_light) {
 
                     _get_light_result(true, true);
-                }else{
+                } else {
 
                     _get_light_result(true, false);
                 }
@@ -266,7 +269,7 @@ public abstract class ZxingScanActivity extends AppCompatActivity {
         });
 
         //手机没有传感器
-        if(!_light){
+        if (!_light) {
 
             _get_light_result(false, false);
         }

@@ -16,7 +16,7 @@ import qqkj.qqkj_library.toast.ToastUtil;
  * Created by 陈二狗 on 2017/11/7.
  */
 
-public class ZxingActivity extends AppCompatActivity{
+public class ZxingActivity extends AppCompatActivity {
 
     /**
      * 第三方页面传递参数集合
@@ -41,6 +41,7 @@ public class ZxingActivity extends AppCompatActivity{
 
     /**
      * 创建界面
+     *
      * @param savedInstanceState
      */
     @Override
@@ -58,7 +59,7 @@ public class ZxingActivity extends AppCompatActivity{
     /**
      * 接收第三方参数
      */
-    private void _get_intent(){
+    private void _get_intent() {
 
         //接收第三方传递参数集合
         _bundle = getIntent().getExtras();
@@ -71,10 +72,10 @@ public class ZxingActivity extends AppCompatActivity{
             //反射二维码扫描类,用于Zxing框架参数初始化
             _class = Class.forName(_class_name);
 
-        }catch (Exception e){
+        } catch (Exception e) {
         }
 
-        if(null == _class){
+        if (null == _class) {
 
             //参数传递错误时,提示,且关闭该界面
             ToastUtil.getIns(this).get_toast_short("_scan_class_name 参数错误...");
@@ -86,7 +87,7 @@ public class ZxingActivity extends AppCompatActivity{
     /**
      * 初始化Zxing功能
      */
-    private void _init_scan(){
+    private void _init_scan() {
 
         _intent_integrator = new IntentIntegrator(this);
 
@@ -103,6 +104,7 @@ public class ZxingActivity extends AppCompatActivity{
 
     /**
      * 扫描二维码/条形码结果回调
+     *
      * @param requestCode
      * @param resultCode
      * @param data
@@ -113,18 +115,18 @@ public class ZxingActivity extends AppCompatActivity{
         //接收扫描结果回调
         IntentResult _result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
-        if(_result != null){
+        if (_result != null) {
 
             //根据不同的返回值,发送不同的广播
-            if(_result.getContents() == null){
+            if (_result.getContents() == null) {
 
-                sendBroadcast(new Intent("_get_scan_result").putExtra("_scan_result",""));
+                sendBroadcast(new Intent("_get_scan_result").putExtra("_scan_result", ""));
 
-            }else{
+            } else {
 
-                sendBroadcast(new Intent("_get_scan_result").putExtra("_scan_result",_result.getContents()));
+                sendBroadcast(new Intent("_get_scan_result").putExtra("_scan_result", _result.getContents()));
             }
-        }else{
+        } else {
 
             super.onActivityResult(requestCode, resultCode, data);
         }

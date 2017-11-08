@@ -14,11 +14,12 @@ import com.journeyapps.barcodescanner.ViewfinderView;
 
 public class ZxingView extends ViewfinderView {
 
-    public ZxingView(Context _context, AttributeSet _at){
+    public ZxingView(Context _context, AttributeSet _at) {
 
         super(_context, _at);
     }
 
     @Override
-    public void onDraw(Canvas canvas) {}
+    public void onDraw(Canvas canvas) {
+    }
 }
