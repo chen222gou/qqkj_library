@@ -7,11 +7,11 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
 import com.journeyapps.barcodescanner.CaptureManager;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
+import com.zhy.autolayout.AutoLayoutActivity;
 
 import qqkj.qqkj_library.R;
 import qqkj.qqkj_library.broadcast.BroadCastUtil;
@@ -23,7 +23,7 @@ import qqkj.qqkj_library.sensor.light.LightUtil;
  * Created by 陈二狗 on 2017/11/7.
  */
 
-public abstract class ZxingScanActivity extends AppCompatActivity {
+public abstract class ZxingScanActivity extends AutoLayoutActivity {
 
     /**
      * 扫码识别管理类
