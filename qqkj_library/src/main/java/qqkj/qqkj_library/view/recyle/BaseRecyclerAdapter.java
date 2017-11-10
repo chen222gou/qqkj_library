@@ -106,10 +106,12 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<SmartV
 //        return false;
 //    }
 
+    @Override
     public void registerDataSetObserver(DataSetObserver observer) {
         mDataSetObservable.registerObserver(observer);
     }
 
+    @Override
     public void unregisterDataSetObserver(DataSetObserver observer) {
         mDataSetObservable.unregisterObserver(observer);
     }
@@ -131,10 +133,12 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<SmartV
         mDataSetObservable.notifyInvalidated();
     }
 
+    @Override
     public boolean areAllItemsEnabled() {
         return true;
     }
 
+    @Override
     public boolean isEnabled(int position) {
         return true;
     }
@@ -153,14 +157,17 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<SmartV
         return convertView;
     }
 
+    @Override
     public int getItemViewType(int position) {
         return 0;
     }
 
+    @Override
     public int getViewTypeCount() {
         return 1;
     }
 
+    @Override
     public boolean isEmpty() {
         return getCount() == 0;
     }
@@ -175,5 +182,4 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<SmartV
         return mList.size();
     }
 
-    //</editor-fold>
 }

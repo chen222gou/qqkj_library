@@ -1,4 +1,4 @@
-package qqkj.qqkj_library.version;
+package qqkj.qqkj_library.app.version;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

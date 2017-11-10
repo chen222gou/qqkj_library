@@ -1,4 +1,4 @@
-package qqkj.qqkj_library.version;
+package qqkj.qqkj_library.app.version;
 
 /**
  * 这个类是用来做甚的
