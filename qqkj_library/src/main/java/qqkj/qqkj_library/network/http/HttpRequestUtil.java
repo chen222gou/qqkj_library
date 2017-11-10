@@ -13,6 +13,8 @@ import java.io.PrintStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import qqkj.qqkj_library.network.model.HttpResponseModel;
+
 
 /**
  * 这个类是用来做甚的
@@ -350,18 +352,4 @@ public class HttpRequestUtil {
         return _ex_content;
     }
 
-
-    /**
-     * 请求返回类
-     */
-    public class HttpResponseModel {
-
-        public String _response_content = null;
-
-        public int _response_code = 0;
-
-        public boolean _response_error = false;
-
-        public String _response_error_msg = "服务器请求接口数据正常....";
-    }
 }

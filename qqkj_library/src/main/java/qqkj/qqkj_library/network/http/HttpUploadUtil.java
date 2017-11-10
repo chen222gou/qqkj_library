@@ -19,6 +19,8 @@ import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 
+import qqkj.qqkj_library.network.model.HttpUploadModel;
+
 /**
  * 这个类是用来做甚的
  * <p>
@@ -295,19 +297,7 @@ public class HttpUploadUtil {
     }
 
 
-    /**
-     * 上传返回类
-     */
-    public class HttpUploadModel {
 
-        public String _response_content = null;
-
-        public int _response_code = 0;
-
-        public boolean _response_error = false;
-
-        public String _response_error_msg = "服务器请求接口数据正常....";
-    }
 
 
     /**

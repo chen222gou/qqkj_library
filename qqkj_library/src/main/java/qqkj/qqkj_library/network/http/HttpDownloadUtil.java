@@ -2,6 +2,7 @@ package qqkj.qqkj_library.network.http;
 
 import android.os.Environment;
 import android.util.Log;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -12,6 +13,8 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import qqkj.qqkj_library.network.model.HttpDownloadModel;
 
 /**
  * 这个类是用来做甚的
@@ -239,21 +242,6 @@ public class HttpDownloadUtil {
         }
 
         return _result;
-    }
-
-
-    /**
-     * 下载实体类
-     */
-    public class HttpDownloadModel {
-
-        public String _response_content = null;
-
-        public int _response_code = 0;
-
-        public boolean _response_error = false;
-
-        public String _response_error_msg = "服务器请求接口数据正常....";
     }
 
 
