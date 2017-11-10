@@ -59,24 +59,5 @@ public class VersionUtil {
     }
 
 
-    /**
-     * 版本实体类
-     */
-    class VersionModel {
 
-        /**
-         * 版本号
-         */
-        public String _version_code;
-
-        /**
-         * 版本名称
-         */
-        public String _version_name;
-
-        /**
-         * 包名
-         */
-        public String _package_name;
-    }
 }
