@@ -2,7 +2,11 @@ package qqkj.qqkj_library.view.dialog;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
+import android.widget.TextView;
+
+import java.lang.reflect.Field;
 
 /**
  * 这个类是用来做甚的
@@ -77,5 +81,33 @@ public class DialogUtil {
         _dialog_builder.setCancelable(false);
 
         return _dialog_builder.show();
+    }
+
+
+    /**
+     * 反射获取AlertDialog中MessageView
+     * @param _dialog
+     * @return
+     */
+    public TextView _get_dialog_message_view(AlertDialog _dialog){
+
+        try {
+            //反射AlertDialog
+            Field _alert = AlertDialog.class.getDeclaredField("mAlert");
+
+            _alert.setAccessible(true);
+
+            Object _controller = _alert.get(_dialog);
+
+            Field _message = _controller.getClass().getDeclaredField("mMessageView");
+
+            _message.setAccessible(true);
+
+            return (TextView) _message.get(_controller);
+        }catch (Exception e){
+
+        }
+
+        return null;
     }
 }
