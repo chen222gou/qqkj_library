@@ -2,8 +2,8 @@ package qqkj.qqkj_library.view.dialog;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
@@ -81,6 +81,28 @@ public class DialogUtil {
         _dialog_builder.setCancelable(false);
 
         return _dialog_builder.show();
+    }
+
+
+    /**
+     * 正极按钮
+     * @param _dialog
+     * @return
+     */
+    public Button _get_dialog_button_positive(AlertDialog _dialog){
+
+        return _dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+    }
+
+
+    /**
+     * 负极按钮
+     * @param _dialog
+     * @return
+     */
+    public Button _get_dialog_button_negative(AlertDialog _dialog){
+
+        return _dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
     }
 
 
