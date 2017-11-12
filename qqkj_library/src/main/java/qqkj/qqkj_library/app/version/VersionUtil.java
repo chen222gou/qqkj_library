@@ -35,7 +35,7 @@ public class VersionUtil {
      */
     public VersionModel _get_version() {
 
-        VersionModel _version_model = null;
+        VersionModel _version_model = new VersionModel();
 
         try {
             PackageManager _package_manager = _context.getPackageManager();
