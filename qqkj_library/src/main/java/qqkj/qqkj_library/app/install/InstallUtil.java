@@ -3,6 +3,7 @@ package qqkj.qqkj_library.app.install;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Process;
 
 import java.io.File;
 
@@ -61,6 +62,9 @@ public class InstallUtil {
         _intent.setDataAndType(Uri.fromFile(new File(_apk_path)),"application/vnd.android.package-archive");
 
         _context.startActivity(_intent);
+
+        //安装完成后显示打开按钮,如果不加,安装后没有打开按钮
+        Process.killProcess(Process.myPid());
 
         return true;
     }
