@@ -42,12 +42,26 @@ public class InstallUtil {
      * 安装APK
      * @param _apk_path    APK文件存放路径
      */
-    public void _get_install_apk(String _apk_path){
+    public boolean _get_install_apk(String _apk_path){
+
+        //如果路径为空,返回false
+        if(null == _apk_path){
+
+            return false;
+        }
+
+        //如果文件不存在,返回false
+        if(!new File(_apk_path).exists()){
+
+            return false;
+        }
 
         _intent = new Intent(Intent.ACTION_VIEW);
 
         _intent.setDataAndType(Uri.fromFile(new File(_apk_path)),"application/vnd.android.package-archive");
 
         _context.startActivity(_intent);
+
+        return true;
     }
 }
