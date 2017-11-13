@@ -46,6 +46,11 @@ public class HttpAliUploadUtil {
      */
     private int _upload_sum = 0;
 
+    /**
+     * 上传文件名
+     */
+    private String _file_path = null;
+
 
     /**
      * 上传成功后文件路径集合
@@ -130,7 +135,11 @@ public class HttpAliUploadUtil {
         boolean _check_file_success = true;
 
         //用于存储上传后的文件路径
-        final List<String> _response_files = new ArrayList<>();
+        if(null != _response_list){
+
+            _response_list.clear();
+        }
+        _response_list = new ArrayList<>();
 
         //检查文件路径是否为空
         if (_file_path == null || _file_path.length == 0) {
@@ -172,11 +181,13 @@ public class HttpAliUploadUtil {
     }
 
 
-    public void _get_upload(final String _buck_name, final String _server_file_path, final String _last_name,
+    private void _get_upload(final String _buck_name, final String _server_file_path, final String _last_name,
                             final int _index, final String[] _upload_file_path, final HttpAliUploadListener _listener) {
 
 
-        String _file_path = _server_file_path + "/" + System.currentTimeMillis() + "." + _last_name;
+
+
+        _file_path = _server_file_path + "/" + System.currentTimeMillis() + "." + _last_name;
 
         PutObjectRequest _put_object_request = new PutObjectRequest(_buck_name, _file_path, _upload_file_path[_index - 1]);
 
@@ -211,6 +222,7 @@ public class HttpAliUploadUtil {
                 } else {
 
                     //表示这是最后一张上传成功了,发送回调
+
                     _listener._upload_success(_response_list);
                 }
             }
