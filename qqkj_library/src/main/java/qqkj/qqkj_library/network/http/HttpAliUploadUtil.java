@@ -120,7 +120,7 @@ public class HttpAliUploadUtil {
      * @param _file_path
      * @param _listener
      */
-    public void _get_upload_file(final String _bucket_name, final String _server_file_path,
+    public void _get_upload_file(final OSSClient _oss_client, final String _bucket_name, final String _server_file_path,
 
                                  final String _last_file_name, final String[] _file_path, final HttpAliUploadListener _listener) {
 
@@ -166,11 +166,11 @@ public class HttpAliUploadUtil {
         _listener._upload_index(1);
 
         //如果存在,上传多张文件
-        _get_upload(_bucket_name, _server_file_path, _last_file_name, _upload_index, _file_path, _listener);
+        _get_upload(_oss_client, _bucket_name, _server_file_path, _last_file_name, _upload_index, _file_path, _listener);
     }
 
 
-    public void _get_upload(final String _buck_name, final String _server_file_path, final String _last_name,
+    public void _get_upload(final OSSClient _oss_client, final String _buck_name, final String _server_file_path, final String _last_name,
                             final int _index, final String[] _upload_file_path, final HttpAliUploadListener _listener) {
 
 
@@ -205,7 +205,7 @@ public class HttpAliUploadUtil {
 
                     _listener._upload_index(_upload_index);
 
-                    _get_upload(_buck_name, _server_file_path, _last_name, _upload_index, _upload_file_path, _listener);
+                    _get_upload(_oss_client,_buck_name, _server_file_path, _last_name, _upload_index, _upload_file_path, _listener);
                 } else {
 
                     //表示这是最后一张上传成功了,发送回调
