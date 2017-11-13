@@ -1,11 +1,9 @@
 package qqkj.qqkj_library.network.http;
 
 import android.content.Context;
-import android.system.Os;
 
 import com.alibaba.sdk.android.oss.ClientConfiguration;
 import com.alibaba.sdk.android.oss.ClientException;
-import com.alibaba.sdk.android.oss.OSS;
 import com.alibaba.sdk.android.oss.OSSClient;
 import com.alibaba.sdk.android.oss.ServiceException;
 import com.alibaba.sdk.android.oss.callback.OSSCompletedCallback;
@@ -66,10 +64,11 @@ public class HttpAliUploadUtil {
      *
      * @param _context
      */
-    public HttpAliUploadUtil(Context _context) {
+    public HttpAliUploadUtil(Context _context, String _end_point, String _ak, String _sk) {
 
         this._context = _context;
 
+        _get_init(_end_point, _ak, _sk);
     }
 
 
@@ -79,13 +78,13 @@ public class HttpAliUploadUtil {
      * @param _context
      * @return
      */
-    public static HttpAliUploadUtil getIns(Context _context) {
+    public static HttpAliUploadUtil getIns(Context _context, String _end_point, String _ak, String _sk) {
 
-        if (_http_aliupload_util == null) {
-
-            _http_aliupload_util = new HttpAliUploadUtil(_context);
-        }
-        return _http_aliupload_util;
+//        if (_http_aliupload_util == null) {
+//
+//            _http_aliupload_util =
+//        }
+        return new HttpAliUploadUtil(_context, _end_point, _ak, _sk);
     }
 
 
@@ -183,8 +182,6 @@ public class HttpAliUploadUtil {
 
     private void _get_upload(final String _buck_name, final String _server_file_path, final String _last_name,
                             final int _index, final String[] _upload_file_path, final HttpAliUploadListener _listener) {
-
-
 
 
         _file_path = _server_file_path + "/" + System.currentTimeMillis() + "." + _last_name;
