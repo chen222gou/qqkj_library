@@ -1,9 +1,11 @@
 package qqkj.qqkj_library.network.http;
 
 import android.content.Context;
+import android.system.Os;
 
 import com.alibaba.sdk.android.oss.ClientConfiguration;
 import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.OSS;
 import com.alibaba.sdk.android.oss.OSSClient;
 import com.alibaba.sdk.android.oss.ServiceException;
 import com.alibaba.sdk.android.oss.callback.OSSCompletedCallback;
@@ -87,9 +89,9 @@ public class HttpAliUploadUtil {
      *
      * @param _end_point
      * @param _ak
-     * @param _sk
+     * @parask
      */
-    public void _get_init(String _end_point, String _ak, String _sk) {
+    public OSSClient _get_init(String _end_point, String _ak, String _sk) {
 
         // 在移动端建议使用STS的方式初始化OSSClient，更多信息参考：[访问控制]
         OSSCredentialProvider _credential_provider = new OSSPlainTextAKSKCredentialProvider(_ak, _sk);
@@ -109,6 +111,8 @@ public class HttpAliUploadUtil {
         _conf.setMaxErrorRetry(0);
 
         _oss_client = new OSSClient(_context, _end_point, _credential_provider, _conf);
+
+        return _oss_client;
     }
 
 
