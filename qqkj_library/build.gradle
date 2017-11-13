@@ -6,7 +6,7 @@ android {
     buildToolsVersion '26.0.2'
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -37,10 +37,10 @@ allprojects {
 }
 
 dependencies {
+    //官方包
     compile 'com.android.support:appcompat-v7:25+'
     compile 'com.android.support:design:25+'
     compile 'com.android.support:support-v4:25+'
-
     //自动布局
     compile 'com.zhy:autolayout:1.4.5'
     //gson解析包
@@ -61,6 +61,12 @@ dependencies {
     compile 'com.journeyapps:zxing-android-embedded:3.5.0'
     //支付宝支付
     compile files('src/libs/alipaySdk-20170922.jar')
+    //阿里上传文件
+    compile 'com.aliyun.dpa:oss-android-sdk:2.4.4'
+    //okhttp
+    compile 'com.squareup.okhttp3:okhttp:3.7.0'
+    //okio
+    compile 'com.squareup.okio:okio:1.9.0'
 //        compile files('src/libs/universal-image-loader-1.9.4.jar')
     //
     //logback
