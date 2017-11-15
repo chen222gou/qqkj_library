@@ -1,6 +1,7 @@
 package qqkj.qqkj_library.view.banner;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -54,36 +55,64 @@ public abstract class BannerFragment extends Fragment{
         });
     }
 
-    private Handler _handler = new Handler(){
-
+    private Handler _handler = new Handler(new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public boolean handleMessage(Message msg) {
 
             if(_list_data.size() > 0){
 
-                setBannerNormalPoint();
+                getBannerNormalPoint();
 
-                setBannerSelectPoint();
+                getBannerSelectPoint();
 
-                setBannerListData();
+                getBannerListData();
 
-                setBannerAdapter();
+                getBannerAdapter();
 
-                setBannerItemClick();
+                getBannerItemClick();
             }
+
+            return false;
         }
-    };
+    });
+
+    private void getBannerNormalPoint(){
+
+        _banner.setNormalPoint(getResources().getDrawable(setBannerNormalPoint()));
+    }
+
+
+    private void getBannerSelectPoint(){
+
+        _banner.setSelectPoint(getResources().getDrawable(setBannerSelectPoint()));
+    }
+
+
+    private void getBannerListData(){
+
+        _banner.setData(_list_data,null);
+    }
+
+
+    private void getBannerAdapter(){
+
+        _banner.setmAdapter(setBannerAdapter());
+    }
+
+
+    private void getBannerItemClick(){
+
+        _banner.setOnItemClickListener(setBannerItemClick());
+    }
+
 
     public abstract List<Object> getBannerData();
 
-    public abstract void setBannerNormalPoint();
+    public abstract int setBannerNormalPoint();
 
-    public abstract void setBannerSelectPoint();
+    public abstract int setBannerSelectPoint();
 
-    public abstract void setBannerListData();
+    public abstract BannerUtil.XBannerAdapter setBannerAdapter();
 
-    public abstract void setBannerAdapter();
-
-    public abstract void setBannerItemClick();
+    public abstract BannerUtil.OnItemClickListener setBannerItemClick();
 }
