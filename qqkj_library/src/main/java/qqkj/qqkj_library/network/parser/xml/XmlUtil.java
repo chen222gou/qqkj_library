@@ -175,7 +175,7 @@ public class XmlUtil {
      * @param _xml_log
      * @return
      */
-    public Object _get_xml_to_list(String _xml, Object _object, boolean _xml_log) {
+    public List<Object> _get_xml_to_list(String _xml, Object _object, boolean _xml_log) {
 
         try {
 
@@ -238,6 +238,8 @@ public class XmlUtil {
                             _xml_result_object = _object.getClass().newInstance();
                         }
                         break;
+                    default:
+                        break;
                 }
 
                 _event_type = _xml_parser.next();
@@ -252,7 +254,7 @@ public class XmlUtil {
             }
         }
 
-        return _xml_result_object;
+        return _xml_result_list;
     }
 
 }
