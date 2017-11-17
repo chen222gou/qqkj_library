@@ -28,17 +28,6 @@ public abstract class RecyclerFragment extends Fragment {
 
     public RecyclerView _recycler_view = null;
 
-    public boolean _is_create = false;
-
-    public boolean _is_request = false;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        _is_create = true;
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,22 +36,11 @@ public abstract class RecyclerFragment extends Fragment {
 
         _init_layout(_view);
 
+        _get_data();
+
         return _view;
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-
-        _request();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        _request();
-    }
 
     private void _init_layout(View _view){
 
@@ -115,18 +93,12 @@ public abstract class RecyclerFragment extends Fragment {
 
     }
 
-    /**
-     * 防止ViewPager每次创建Fragment
-     */
-    private void _request(){
 
-        if (_is_create && getUserVisibleHint() && !_is_request){
+    public void _set_recycler_background(int _res){
 
-            _get_data();
+        if(null != _smart_layout){
 
-            _is_create = false;
-
-            _is_request = true;
+            _smart_layout.setBackgroundResource(_res);
         }
     }
 
