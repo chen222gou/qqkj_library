@@ -28,21 +28,47 @@ public abstract class RecyclerFragment extends Fragment {
 
     public RecyclerView _recycler_view = null;
 
+    public boolean _is_create = false;
+
+    public boolean _is_request = false;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        _is_create = true;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View _view = inflater.inflate(R.layout.recycler_layout, container, false);
 
-        _init_smart_layout(_view);
-
-        _init_recycler_view(_view);
+        _init_layout(_view);
 
         return _view;
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
 
-    private void _init_smart_layout(View _view){
+        _request();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        _request();
+    }
+
+    private void _init_layout(View _view){
+
+        _recycler_view = (RecyclerView) _view.findViewById(R.id._qqkj_recycler_view);
+
+        _recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
 
         _smart_layout = (SmartRefreshLayout) _view.findViewById(R.id._qqkj_smart_view);
 
@@ -89,20 +115,19 @@ public abstract class RecyclerFragment extends Fragment {
 
     }
 
+    /**
+     * 防止ViewPager每次创建Fragment
+     */
+    private void _request(){
 
-    public void _init_recycler_view(View _view){
+        if (_is_create && getUserVisibleHint() && !_is_request){
 
-        _recycler_view = (RecyclerView) _view.findViewById(R.id._qqkj_recycler_view);
+            _get_data();
 
-        _recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
+            _is_create = false;
 
-        _get_recycle(_recycler_view);
-    }
-
-
-    public RecyclerView _get_recycler_view(){
-
-        return _recycler_view;
+            _is_request = true;
+        }
     }
 
 
@@ -114,6 +139,6 @@ public abstract class RecyclerFragment extends Fragment {
 
     protected abstract void _get_refresh();
 
-    protected abstract void _get_recycle(RecyclerView _recycler_view);
+    protected abstract void _get_data();
 
 }
