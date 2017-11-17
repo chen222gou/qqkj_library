@@ -28,6 +28,9 @@ public class FragmentUtil {
 
         Fragment fragment = _child_manager.findFragmentById(_child_id);
 
-        _manager.beginTransaction().remove(fragment).commit();
+        if(null != fragment && null != _manager){
+
+            _manager.beginTransaction().remove(fragment).commit();
+        }
     }
 }
