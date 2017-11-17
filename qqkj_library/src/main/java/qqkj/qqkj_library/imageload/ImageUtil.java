@@ -233,7 +233,7 @@ public class ImageUtil {
             _temp_build = _image_build_round;
 
             _temp_options = _display_image_options_round;
-        }else if(_type ==3){
+        }else if(_type == 3){
 
             _temp_build = _image_build_circle;
 
@@ -249,6 +249,7 @@ public class ImageUtil {
                 _temp_build.showImageOnFail(_defalut[0]);
 
                 _temp_build.showImageOnLoading(_defalut[0]);
+
             }else if(_defalut.length == 2){
 
                 _temp_build.showImageForEmptyUri(_defalut[0]);
@@ -256,6 +257,7 @@ public class ImageUtil {
                 _temp_build.showImageOnFail(_defalut[0]);
 
                 _temp_build.showImageOnLoading(_defalut[1]);
+
             }else if(_defalut.length == 3){
 
                 _temp_build.showImageForEmptyUri(_defalut[0]);
@@ -267,6 +269,19 @@ public class ImageUtil {
 
 
             _temp_options = _temp_build.build();
+
+            if(_type == 1){
+
+                _display_image_options_none = _temp_options;
+
+            }else if(_type == 2){
+
+                _display_image_options_round = _temp_options;
+
+            }else if(_type == 3){
+
+                _display_image_options_circle = _temp_options;
+            }
         }
     }
 
@@ -279,12 +294,12 @@ public class ImageUtil {
      */
     public void _load_http_image_none(String _url, ImageView _image, int... _default){
 
+        _image_none_init();
+
         if(_default.length > 0){
 
             _set_default_image(1, _default);
         }
-
-        _image_none_init();
 
         _animation_first_listener = new AnimateFirstDisplayListener();
 
@@ -300,12 +315,12 @@ public class ImageUtil {
      */
     public void _load_http_image_round(String _url, ImageView _image, int _round, int... _default){
 
+        _image_round_init(_round);
+
         if(_default.length > 0){
 
             _set_default_image(2, _default);
         }
-
-        _image_round_init(_round);
 
         _animation_first_listener = new AnimateFirstDisplayListener();
 
@@ -321,12 +336,12 @@ public class ImageUtil {
      */
     public void _load_http_image_circle(String _url, ImageView _image, int... _default){
 
+        _image_circle_init();
+
         if(_default.length > 0){
 
             _set_default_image(3, _default);
         }
-
-        _image_circle_init();
 
         _animation_first_listener = new AnimateFirstDisplayListener();
 
@@ -342,12 +357,12 @@ public class ImageUtil {
      */
     public void _load_sdcard_image_none(String _url, ImageView _image, int... _default){
 
+        _image_none_init();
+
         if(_default.length > 0){
 
             _set_default_image(1, _default);
         }
-
-        _image_none_init();
 
         _animation_first_listener = new AnimateFirstDisplayListener();
 
@@ -363,12 +378,12 @@ public class ImageUtil {
      */
     public void _load_sdcard_image_round(String _url, ImageView _image, int _round, int... _default){
 
+        _image_round_init(_round);
+
         if(_default.length > 0){
 
             _set_default_image(2, _default);
         }
-
-        _image_round_init(_round);
 
         _animation_first_listener = new AnimateFirstDisplayListener();
 
@@ -384,12 +399,12 @@ public class ImageUtil {
      */
     public void _load_sdcard_image_circle(String _url, ImageView _image, int... _default){
 
+        _image_circle_init();
+
         if(_default.length > 0){
 
             _set_default_image(3, _default);
         }
-
-        _image_circle_init();
 
         _animation_first_listener = new AnimateFirstDisplayListener();
 
