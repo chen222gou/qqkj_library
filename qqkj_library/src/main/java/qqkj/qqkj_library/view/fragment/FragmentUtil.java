@@ -30,7 +30,7 @@ public class FragmentUtil {
 
         if(null != fragment && null != _manager){
 
-            _manager.beginTransaction().remove(fragment).commit();
+            _manager.beginTransaction().remove(fragment).commitAllowingStateLoss();
         }
     }
 }
