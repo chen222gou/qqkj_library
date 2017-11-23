@@ -1,4 +1,4 @@
-package qqkj.qqkj_library.view.recycler;
+package qqkj.qqkj_library.view.recycler.space;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +10,7 @@ import android.view.View;
  * Created by 陈二狗 on 2017/11/23.
  */
 
-public class RecyclerItemDecoration extends RecyclerView.ItemDecoration{
+public class RecyclerLinearLayoutDecoration extends RecyclerView.ItemDecoration{
 
     int _item_space = 0;
 
@@ -32,7 +32,7 @@ public class RecyclerItemDecoration extends RecyclerView.ItemDecoration{
 
     }
 
-    public RecyclerItemDecoration(int space) {
+    public RecyclerLinearLayoutDecoration(int space) {
 
         this._item_space = space;
     }
