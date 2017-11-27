@@ -1,6 +1,7 @@
 package qqkj.qqkj_library.view.fragment;
 
 
+import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
@@ -24,7 +25,12 @@ public class FragmentUtil {
      * @param _child_manager
      * @param _child_id
      */
-    public void _get_destroy_child_fragment(FragmentManager _manager, FragmentManager _child_manager, int _child_id){
+    public void _get_destroy_child_fragment(Activity _context, FragmentManager _manager, FragmentManager _child_manager, int _child_id){
+
+        if(_context == null){
+
+            return;
+        }
 
         Fragment fragment = _child_manager.findFragmentById(_child_id);
 
