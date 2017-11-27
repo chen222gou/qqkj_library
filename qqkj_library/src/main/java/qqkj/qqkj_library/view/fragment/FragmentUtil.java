@@ -27,7 +27,7 @@ public class FragmentUtil {
      */
     public void _get_destroy_child_fragment(Activity _context, FragmentManager _manager, FragmentManager _child_manager, int _child_id){
 
-        if(_context == null){
+        if(_context.isDestroyed()){
 
             return;
         }
