@@ -25,10 +25,7 @@ public class StatusBarUtil {
 
     public static StatusBarUtil getIns(Activity _context) {
 
-        if (_status_bar_util == null) {
-
-            _status_bar_util = new StatusBarUtil(_context);
-        }
+        _status_bar_util = new StatusBarUtil(_context);
 
         return _status_bar_util;
     }
@@ -50,6 +47,7 @@ public class StatusBarUtil {
 
     /**
      * 设置statusbar背景色
+     *
      * @param _color
      */
     public void set_status_bar_color(int _color) {
