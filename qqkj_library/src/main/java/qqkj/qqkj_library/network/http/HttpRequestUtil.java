@@ -242,6 +242,8 @@ public class HttpRequestUtil {
             }
         } catch (Exception e) {
 
+            e.printStackTrace();
+
             _response_model._response_error = true;
 
             if(null != e.getCause()){
