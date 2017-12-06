@@ -150,7 +150,10 @@ public class HttpRequestUtil {
 
             _response_model._response_error = true;
 
-            _response_model._response_error_msg = e.getMessage() + "\n" + e.getCause().getMessage();
+            if(null != e.getCause()){
+
+                _response_model._response_error_msg = e.getMessage() + "\n" + e.getCause().getMessage();
+            }
         }
 
         network_log(_request_log, "                                                  ");
@@ -241,7 +244,10 @@ public class HttpRequestUtil {
 
             _response_model._response_error = true;
 
-            _response_model._response_error_msg = e.getMessage() + "\n" + e.getCause().getMessage();
+            if(null != e.getCause()){
+
+                _response_model._response_error_msg = e.getMessage() + "\n" + e.getCause().getMessage();
+            }
         }
 
         network_log(_request_log, "                                                  ");
