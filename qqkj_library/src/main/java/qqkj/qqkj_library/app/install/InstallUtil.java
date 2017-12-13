@@ -47,7 +47,7 @@ public class InstallUtil {
      *
      * @param _apk_path APK文件存放路径
      */
-    public boolean _get_install_apk(String _apk_path) {
+    public boolean _get_install_apk(String _apk_path, String _application_id) {
 
         //如果路径为空,返回false
         if (null == _apk_path) {
@@ -67,7 +67,7 @@ public class InstallUtil {
 
         if (Build.VERSION.SDK_INT >= 24) {
 
-            _uri = FileProvider.getUriForFile(_context, BuildConfig.APPLICATION_ID + ".provider", new File(_apk_path));
+            _uri = FileProvider.getUriForFile(_context, _application_id + ".provider", new File(_apk_path));
 
         } else {
 
