@@ -61,28 +61,42 @@ public class InstallUtil {
             return false;
         }
 
-        _intent = new Intent(Intent.ACTION_VIEW);
+        try {
 
-        Uri _uri = null;
 
-        if (Build.VERSION.SDK_INT >= 24) {
+            _intent = new Intent(Intent.ACTION_VIEW);
 
-            _uri = FileProvider.getUriForFile(_context, _application_id + ".provider", new File(_apk_path));
+            Uri _uri = null;
 
-            _intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            if (Build.VERSION.SDK_INT >= 24) {
 
-        } else {
+                _uri = FileProvider.getUriForFile(_context, _application_id + ".provider", new File(_apk_path));
 
-            _uri = Uri.fromFile(new File(_apk_path));
+                _intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+                _intent.setDataAndType(_uri, "application/vnd.android.package-archive");
+
+                _context.startActivity(_intent);
+
+
+            } else {
+
+                _uri = Uri.fromFile(new File(_apk_path));
+
+                _intent.setDataAndType(_uri, "application/vnd.android.package-archive");
+
+                _context.startActivity(_intent);
+
+                //安装完成后显示打开按钮,如果不加,安装后没有打开按钮
+                Process.killProcess(Process.myPid());
+            }
+
+            return true;
+
+        }catch (Exception e){
+
+            e.printStackTrace();
         }
-
-        _intent.setDataAndType(_uri, "application/vnd.android.package-archive");
-
-        _context.startActivity(_intent);
-
-        //安装完成后显示打开按钮,如果不加,安装后没有打开按钮
-        Process.killProcess(Process.myPid());
-
-        return true;
+        return false;
     }
 }
