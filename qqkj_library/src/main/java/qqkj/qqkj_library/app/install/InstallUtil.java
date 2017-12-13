@@ -69,6 +69,8 @@ public class InstallUtil {
 
             _uri = FileProvider.getUriForFile(_context, _application_id + ".provider", new File(_apk_path));
 
+            _intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
         } else {
 
             _uri = Uri.fromFile(new File(_apk_path));
