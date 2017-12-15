@@ -37,7 +37,7 @@ public class NetWorkUtil {
         try {
 
             //通过ping网址的方式,查看网络是否可用,,,这里选择百度,,因为稳定
-            _progress = Runtime.getRuntime().exec("ping -c 1 www.xiaooo.cn");
+            _progress = Runtime.getRuntime().exec("ping -c 1 www.sogou.com");
 
             //获取ping后的返回值
             int _result = _progress.waitFor();
