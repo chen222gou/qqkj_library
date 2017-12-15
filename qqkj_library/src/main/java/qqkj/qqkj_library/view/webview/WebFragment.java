@@ -166,7 +166,7 @@ public class WebFragment extends Fragment {
                 // TODO 自动生成的方法存根
 
                 if(newProgress==100){
-                    _web_view.setVisibility(View.VISIBLE);//加载完网页进度条消失
+//                    _web_view.setVisibility(View.VISIBLE);//加载完网页进度条消失
                 }
             }
         });

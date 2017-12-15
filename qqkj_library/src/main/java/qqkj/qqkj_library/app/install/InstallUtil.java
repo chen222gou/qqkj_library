@@ -63,7 +63,6 @@ public class InstallUtil {
 
         try {
 
-
             _intent = new Intent(Intent.ACTION_VIEW);
 
             Uri _uri = null;
