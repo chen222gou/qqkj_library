@@ -28,15 +28,20 @@ public abstract class RecyclerFragment extends Fragment {
 
     public RecyclerView _recycler_view = null;
 
+    public View _view = null;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View _view = inflater.inflate(R.layout.recycler_layout, container, false);
+        if(_view == null){
 
-        _init_layout(_view);
+            _view = inflater.inflate(R.layout.recycler_layout, container, false);
 
-        _get_data();
+            _init_layout(_view);
+
+            _get_data();
+        }
 
         return _view;
     }

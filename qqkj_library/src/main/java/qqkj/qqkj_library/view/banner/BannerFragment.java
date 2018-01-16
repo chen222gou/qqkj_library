@@ -29,15 +29,20 @@ public abstract class BannerFragment extends Fragment{
 
     public List<Object> _list_data = new ArrayList<>();
 
+    public View _view = null;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View _view = inflater.inflate(R.layout.fragment_banner_layout,null);
+        if(_view == null){
 
-        _banner = (BannerUtil) _view.findViewById(R.id._base_banner);
+            _view = inflater.inflate(R.layout.fragment_banner_layout,null);
 
-        LoadBanner();
+            _banner = (BannerUtil) _view.findViewById(R.id._base_banner);
+
+            LoadBanner();
+        }
 
         return _view;
     }

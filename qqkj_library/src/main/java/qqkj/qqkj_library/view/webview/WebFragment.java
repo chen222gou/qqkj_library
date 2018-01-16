@@ -36,7 +36,10 @@ public class WebFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        _group_view = inflater.inflate(R.layout.webview_layout,container);
+        if(_group_view == null){
+
+            _group_view = inflater.inflate(R.layout.webview_layout,container);
+        }
 
         return _group_view;
     }
