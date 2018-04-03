@@ -11,7 +11,8 @@ import android.view.ViewGroup;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import qqkj.qqkj_library.R;
@@ -59,12 +60,12 @@ public abstract class RecyclerFragment extends Fragment {
 
         if(_get_load_time() > 0){
 
-            _smart_layout.setEnableLoadmore(true);
+            _smart_layout.setEnableLoadMore(true);
 
-            _smart_layout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            _smart_layout.setOnLoadMoreListener(new OnLoadMoreListener() {
 
                 @Override
-                public void onLoadmore(RefreshLayout refreshlayout) {
+                public void onLoadMore(RefreshLayout refreshlayout) {
 
                     _get_load();
 
@@ -73,7 +74,7 @@ public abstract class RecyclerFragment extends Fragment {
             });
         }else{
 
-            _smart_layout.setEnableLoadmore(false);
+            _smart_layout.setEnableLoadMore(false);
         }
 
 
