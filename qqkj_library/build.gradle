@@ -50,8 +50,8 @@ dependencies {
     //日志监听
     compile files('src/libs/crasheye_2.2.2.jar')
     //上拉/下滑刷新布局
-    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-alpha-0'
-    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-alpha-0'
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5'
+    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5'
     //网络/本地图片加载
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     //Banner

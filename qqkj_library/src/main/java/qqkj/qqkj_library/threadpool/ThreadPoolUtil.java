@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ThreadPoolUtil {
 
     // 线程池核心线程数
-    private static int CORE_POOL_SIZE = 8;
+    private static int CORE_POOL_SIZE = 20;
 
     // 线程池最大线程数
     private static int MAX_POOL_SIZE = 100;
@@ -44,6 +44,7 @@ public class ThreadPoolUtil {
     static {
 
         threadPool = new ThreadPoolExecutor(CORE_POOL_SIZE, MAX_POOL_SIZE,
+
                 KEEP_ALIVE_TIME, TimeUnit.SECONDS, workQueue, threadFactory);
     }
 

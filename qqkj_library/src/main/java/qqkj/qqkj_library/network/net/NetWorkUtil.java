@@ -44,6 +44,8 @@ public class NetWorkUtil {
 
             _net_work_state = (_result == 0);
 
+            _progress.destroy();
+
         }catch (Exception e){
 
         }
