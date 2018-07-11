@@ -30,9 +30,7 @@ allprojects {
         flatDir {
             dirs 'src/libs'
         }
-//        maven {
-//            url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
-//        }
+
     }
 }
 
@@ -50,8 +48,8 @@ dependencies {
     //日志监听
     compile files('src/libs/crasheye_2.2.2.jar')
     //上拉/下滑刷新布局
-    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5'
-    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5'
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-alpha-0'
+    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-alpha-0'
     //网络/本地图片加载
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     //Banner
@@ -63,6 +61,8 @@ dependencies {
     compile files('src/libs/alipaySdk-20170922.jar')
     //阿里上传文件
     compile 'com.aliyun.dpa:oss-android-sdk:2.4.4'
+    //阿里推送
+//    compile 'com.aliyun.ams:alicloud-android-push:3.1.2'
     //okhttp
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
     //okio
