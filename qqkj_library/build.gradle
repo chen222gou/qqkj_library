@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
 
 android {
     compileSdkVersion 25
@@ -24,7 +26,7 @@ android {
 
 allprojects {
     repositories {
-//        google()
+        google()
         jcenter()
 
         flatDir {
@@ -48,8 +50,8 @@ dependencies {
     //日志监听
     compile files('src/libs/crasheye_2.2.2.jar')
     //上拉/下滑刷新布局
-    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-alpha-0'
-    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-alpha-0'
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5'
+    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5'
     //网络/本地图片加载
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     //Banner
@@ -67,6 +69,12 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
     //okio
     compile 'com.squareup.okio:okio:1.9.0'
+
+    compile 'org.jetbrains.anko:anko-commons:0.10.4'
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.50"
+
+    compile "org.jetbrains.kotlin:kotlin-reflect:1.2.50"
 
 //        compile files('src/libs/universal-image-loader-1.9.4.jar')
     //
@@ -90,5 +98,5 @@ dependencies {
 }
 repositories {
     mavenCentral()
-//    google()
+    google()
 }
