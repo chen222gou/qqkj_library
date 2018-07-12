@@ -13,6 +13,8 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 
+import Decoder.BASE64Encoder;
+
 /**
  * 这个类是用来做甚的
  * 3DES 加密字符串
@@ -87,7 +89,7 @@ public class DesedeUtil {
 
         Key _des_key = null;
 
-        DESedeKeySpec _spec = new DESedeKeySpec(_secret_key.getBytes());
+        DESedeKeySpec _spec = new DESedeKeySpec(_secret_key.getBytes(_encode));
 
         SecretKeyFactory _key_factory = SecretKeyFactory.getInstance(_des_name);
 
@@ -95,13 +97,15 @@ public class DesedeUtil {
 
         Cipher _cipher = Cipher.getInstance(_des_cipher);
 
-        IvParameterSpec _ips = new IvParameterSpec(_iv.getBytes());
+        IvParameterSpec _ips = new IvParameterSpec(_iv.getBytes(_encode));
 
         _cipher.init(Cipher.ENCRYPT_MODE, _des_key, _ips);
 
         byte[] _encrypt_data = _cipher.doFinal(_string_param.getBytes(_encode));
 
-        _3des_result = encode(_encrypt_data);
+        BASE64Encoder _base64 = new BASE64Encoder();
+
+        _3des_result = _base64.encode(_encrypt_data);
 
         if (_base_param.size() > 0) {
 

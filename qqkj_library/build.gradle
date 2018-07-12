@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-android-extensions'
 
 
 android {
@@ -37,64 +37,96 @@ allprojects {
 }
 
 dependencies {
+
     //官方包
     compile 'com.android.support:appcompat-v7:25+'
     compile 'com.android.support:design:25+'
     compile 'com.android.support:support-v4:25+'
+
     //自动布局
     compile 'com.zhy:autolayout:1.4.5'
+
     //gson解析包
     compile 'com.google.code.gson:gson:2.8.1'
+
     //apk分包
     compile 'com.android.support:multidex:1.0.1'
+
     //日志监听
     compile files('src/libs/crasheye_2.2.2.jar')
+
+    //base64
+    compile files('src/libs/BASE64Decoder.jar')
+
+
     //上拉/下滑刷新布局
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5'
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5'
+
     //网络/本地图片加载
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
     //Banner
     compile 'com.xhb:xbanner:1.3.0'
+
     //二维码扫描
-//    compile files('src/libs/zxing.jar')
+
+    //    compile files('src/libs/zxing.jar')
     compile 'com.journeyapps:zxing-android-embedded:3.5.0'
+
     //支付宝支付
     compile files('src/libs/alipaySdk-20170922.jar')
+
     //阿里上传文件
     compile 'com.aliyun.dpa:oss-android-sdk:2.4.4'
+
     //阿里推送
-//    compile 'com.aliyun.ams:alicloud-android-push:3.1.2'
+
+    //    compile 'com.aliyun.ams:alicloud-android-push:3.1.2'
+
     //okhttp
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
+
     //okio
     compile 'com.squareup.okio:okio:1.9.0'
 
-    compile 'org.jetbrains.anko:anko-commons:0.10.4'
+    //        compile files('src/libs/universal-image-loader-1.9.4.jar')
 
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.50"
-
-    compile "org.jetbrains.kotlin:kotlin-reflect:1.2.50"
-
-//        compile files('src/libs/universal-image-loader-1.9.4.jar')
     //
+
     //logback
+
     //    compile 'org.slf4j:slf4j-api:1.7.21'
+
     //    compile 'com.github.tony19:logback-android-core:1.1.1-6'
+
     //    compile 'com.github.tony19:logback-android-classic:1.1.1-6'
+
     //阿里云推送
+
     //    compile 'com.aliyun.ams:alicloud-android-push:2.3.7'
+
     //    compile 'com.aliyun.ams:alicloud-android-third-push:3.0.3@aar'
+
     //    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
     //    compile 'com.android.support:design:25.3.1'
+
     //    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
     //    compile fileTree(dir: 'libs', include: ['*.jar'])
+
     //    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+
     //        exclude group: 'com.android.support', module: 'support-annotations'
+
     //    })
+
     //    compile 'com.android.support:appcompat-v7:25.3.1'
+
     //    testCompile 'junit:junit:4.12'
-//    compile files('src/libs/universal-image-loader-1.9.4.jar')
+
+    //    compile files('src/libs/universal-image-loader-1.9.4.jar')
 }
 repositories {
     mavenCentral()
