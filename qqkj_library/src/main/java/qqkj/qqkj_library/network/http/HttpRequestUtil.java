@@ -25,7 +25,7 @@ import qqkj.qqkj_library.network.model.HttpResponseModel;
 
 public class HttpRequestUtil {
 
-    private static HttpRequestUtil _get_http_request_util;
+//    private static HttpRequestUtil _get_http_request_util;
 
     private static final String LOG_TAG = "qqkj_frame";
 
@@ -57,9 +57,9 @@ public class HttpRequestUtil {
      */
     public static HttpRequestUtil getIns() {
 
-        _get_http_request_util = new HttpRequestUtil();
+//        _get_http_request_util =
 
-        return _get_http_request_util;
+        return new HttpRequestUtil();
     }
 
 
@@ -73,7 +73,7 @@ public class HttpRequestUtil {
 
         CONNECTION_TIMEOUT = _connect_time_out;
 
-        return _get_http_request_util;
+        return this;
     }
 
 
@@ -87,7 +87,7 @@ public class HttpRequestUtil {
 
         READ_TIMEOUT = set_read_time_out;
 
-        return _get_http_request_util;
+        return this;
     }
 
 
