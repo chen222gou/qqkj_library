@@ -49,7 +49,7 @@ public class VersionUtil {
             _version_model._version_name = _package_info.versionName;
 
             //获取包名
-            _version_model._version_code = _package_info.packageName;
+            _version_model._package_name = _package_info.packageName;
 
         } catch (Exception e) {
 
