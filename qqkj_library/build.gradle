@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+    namespace 'qqkj.library'
     compileSdkVersion 25
     buildToolsVersion '26.0.2'
 
