@@ -2,7 +2,7 @@
 //apply plugin: 'kotlin-android'
 //apply plugin: 'kotlin-android-extensions'
 plugins {
-    id 'com.android.library'
+    id 'com.android.library' version '8.0.2' apply false
 }
 
 android {
