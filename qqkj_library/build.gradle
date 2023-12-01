@@ -1,7 +1,9 @@
-apply plugin: 'com.android.library'
+//apply plugin: 'com.android.library'
 //apply plugin: 'kotlin-android'
 //apply plugin: 'kotlin-android-extensions'
-
+plugins {
+    id 'com.android.library'
+}
 
 android {
     compileSdkVersion 25
@@ -22,12 +24,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 allprojects {
     repositories {
-//        google()
         jcenter()
+        google()
+        mavenCentral()
+
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
+            name 'aliyun'
+            allowInsecureProtocol = true
+        }
 
         flatDir {
             dirs 'src/libs'
