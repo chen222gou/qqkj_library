@@ -157,9 +157,9 @@ public class WebFragment extends Fragment {
 
         _web_view.setVerticalScrollBarEnabled(false);
 
-        _web_setting.setAllowFileAccess(true);
+        _web_setting.setAllowFileAccess(false);
 
-        _web_setting.setAllowFileAccessFromFileURLs(true);
+        _web_setting.setAllowFileAccessFromFileURLs(false);
 
         _web_setting.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
